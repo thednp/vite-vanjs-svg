@@ -9,7 +9,7 @@
 [![vite version](https://img.shields.io/badge/vite-6.0.11-brightgreen)](https://vite.dev)
 
 
-A Vite plugin that transforms SVG files into VanJS components using [vanjs-converter](https://github.com/vanjs-org/vanjs-converter).
+A Vite plugin that transforms SVG files into VanJS components using [vanjs-converter](https://github.com/vanjs-org/converter).
 
 
 ## Features

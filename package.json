@@ -5,6 +5,19 @@
   "main": "index.mjs",
   "module": "index.mjs",
   "types": "types.d.ts",
+  "exports": {
+    ".": {
+      "import": "./index.mjs",
+      "types": "./types.d.ts"
+    }
+  },
+  "files": [
+    "index.mjs",
+    "index.test.ts",
+    "types.d.ts",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "test": "vitest --config vitest.config.mts",
     "test-ui": "vitest --config vitest.config.mts --ui=true",
@@ -27,16 +40,17 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/thednp/vite-plugin-svgvan"
+    "url": "https://github.com/thednp/vite-plugin-vanjs-svg"
   },
   "bugs": {
-    "url": "https://github.com/thednp/vite-plugin-svgvan/issues"
+    "url": "https://github.com/thednp/vite-plugin-vanjs-svg/issues"
   },
-  "homepage": "https://github.com/thednp/vite-plugin-svgvan#readme",
+  "homepage": "https://github.com/thednp/vite-plugin-vanjs-svg#readme",
   "dependencies": {
     "@rollup/pluginutils": "^5.1.4",
-    "vanjs-core": "^1.5.3",
-    "vanjs-converter": "^0.2.0"
+    "json5": "^2.2.3",
+    "vanjs-converter": "^0.2.0",
+    "vanjs-core": "^1.5.3"
   },
   "peerDependencies": {
     "vanjs-core": "^1.2.0",

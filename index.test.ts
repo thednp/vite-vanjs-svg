@@ -30,7 +30,7 @@ describe("vite-plugin-vanjs-svg", () => {
         throw new Error("Plugin did not return a result");
       }
 
-    //   console.log(result);
+      console.log(result);
       expect(result).toBeDefined();
       expect(typeof result.code).toBe("string");
 
@@ -45,7 +45,7 @@ describe("vite-plugin-vanjs-svg", () => {
 
       // Check if SVG content is included
       expect(result.code).toContain('viewBox: "0 0 768 767.999994"');
-    } catch(error) {
+    } catch (error) {
       console.error(error);
     }
   });
