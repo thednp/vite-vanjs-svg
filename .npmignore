@@ -5,8 +5,6 @@
 node_modules
 experiments
 coverage
-postcss.config.cjs
-tailwind.config.js
 tsconfig.json
-vite.env.dts
+vitest.config.mts
 index.test.ts
