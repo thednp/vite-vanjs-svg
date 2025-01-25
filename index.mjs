@@ -18,6 +18,7 @@ function transformSvgToVanJS(svgCode, options = /* istanbul ignore next */ {}) {
   // Convert the SVG string directly to VanJS code using htmlToVanCode
   const vanCode = htmlToVanCode(svgCode, {
     ...options,
+    htmlTagPred: (s) => s[0].toUpperCase() !== s[0],
   });
 
   /** @returns {string} */
@@ -68,9 +69,7 @@ import van from 'vanjs-core';
 
 export default function SVGComponent(props = {}) {
 	const { ${
-    vanCode.tags.concat(vanCode.components).join(", ")
-  } } = van.tags("http://www.w3.org/2000/svg");
-
+    vanCode.tags.join(", ")} } = van.tags("http://www.w3.org/2000/svg");
 	const svgComponent = ${getCode()};
 	return svgComponent;
 }
@@ -95,7 +94,6 @@ export default function vitePluginSvgVan(options = {}) {
     enforce: "pre",
     async load(id) {
       if (filter(id)) {
-        // try {
         const filePath = id.replace(postfixRE, "");
         const svgCode = await fs.promises.readFile(filePath, "utf8");
 
@@ -112,11 +110,6 @@ export default function vitePluginSvgVan(options = {}) {
           code: result.code,
           map: null,
         };
-        // istanbul ignore next
-        // } catch (error) {
-        // 	// istanbul ignore next
-        //   console.error(error);
-        // }
       }
       return null;
     },
