@@ -53,14 +53,14 @@ export default defineConfig({
   plugins: [
     // other plugins
     vanSVG({
-        // optional configuration
+        // optional
     })
   ]
 })
 ```
 
 ### Options
-While the default options' work just fine, for your convenience the plugin allows you to set them all:
+While the default options work just fine, for your convenience the plugin allows you to set them all:
 
 ```ts
 interface VitePluginVanSvgOptions {
@@ -80,7 +80,17 @@ interface VitePluginVanSvgOptions {
 * `include`: filter option to **include** one or more RegExp for file IDs;
 * `exclude`: filter option to **exclude** one or more RegExp for file IDs.
 
-In Your Code
+
+### Typescript
+To add typescript support, edit your `src/vite-env.d.ts` (or any global types you have set in your app) as follows:
+
+```ts
+/// <reference types="vite/client" />
+/// <reference types="vite-plugin-vanjs-svg" />
+```
+
+
+### In Your Code
 ```ts
 import Icon from './icon.svg?van'
 
@@ -98,9 +108,9 @@ const app = () => {
 
 ## Contributing
 * Fork it!
-* Create your feature branch: git checkout -b my-new-feature
-* Commit your changes: git commit -am 'Add some feature'
-* Push to the branch: git push origin `my-new-feature`
+* Create your feature branch: `git checkout -b my-new-feature`
+* Commit your changes: `git commit -am 'Add some feature'`
+* Push to the branch: `git push origin `my-new-feature``
 * Submit a pull request
 
 
