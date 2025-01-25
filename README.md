@@ -72,11 +72,11 @@ interface VitePluginVanSvgOptions {
 }
 ```
 
-* `converterOptions`: [VanJSConverterOptions](https://github.com/vanjs-org/converter?tab=readme-ov-file#options) 
-* `esbuildOptions`: [EsbuildTransformOptions](https://esbuild.github.io/api/#transform) will make sure the plugin will work seamless within the Vite ecosystem
+* `converterOptions`: [VanJSConverterOptions](https://github.com/vanjs-org/converter?tab=readme-ov-file#options) allows you to configure various formatting options;
+* `esbuildOptions`: [EsbuildTransformOptions](https://esbuild.github.io/api/#transform) esbuild will make sure the plugin will work seamless within the Vite ecosystem and provides some additional options;
   // filter options
-* `include`: filter option to **include** one or more RegExp
-* `exclude`: filter option to **exclude** one or more RegExp
+* `include`: filter option to **include** one or more RegExp for file IDs;
+* `exclude`: filter option to **exclude** one or more RegExp for file IDs.
 
 In Your Code
 ```ts

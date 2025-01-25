@@ -20,21 +20,17 @@ function transformSvgToVanJS(svgCode, options = /* istanbul ignore next */ {}) {
     ...options,
   });
 
-  /**
-   * @returns {string}
-   */
+  /** @returns {string} */
   const getCode = () => {
     let isInitialProps = false;
     /** @type {string[]} */
     const result = [];
-    // console.log(vanCode.code);
     vanCode.code.forEach((code) => {
       if (
-        ["xmlns", "xmlns:xlink", "viewBox"].some((c) => code.includes(c)) &&
+        ["xmlns", "viewBox"].some((c) => code.includes(c)) &&
         !isInitialProps
       ) {
         isInitialProps = true;
-        console.log("vanCode.code.forEach -> code\n", code);
         const initialProps = JSON5.parse(
           code.replace("svg(", "").replace("},", "}"),
         );
@@ -46,8 +42,12 @@ svg({
           Object.entries(rest).map(([key, value]) => `"${key}": "${value}"`)
             .join(",\n")
         },
-	width: van.derive(() => props.width || ${width || '""'}),
-	height: van.derive(() => props.width || ${height || '""'}),
+	width: van.derive(() => props.width || ${
+          Number(width) || /* istanbul ignore next */ '""'
+        }),
+	height: van.derive(() => props.width || ${
+          Number(height) || /* istanbul ignore next */ '""'
+        }),
 	class: van.derive(() => props.class || ${className || '""'}),
 	style: van.derive(() => props.style || ${style || '""'}),
 },
@@ -67,7 +67,9 @@ svg({
 import van from 'vanjs-core';
 
 export default function SVGComponent(props = {}) {
-	const { ${vanCode.tags.join(", ")} } = van.tags("http://www.w3.org/2000/svg");
+	const { ${
+    vanCode.tags.concat(vanCode.components).join(", ")
+  } } = van.tags("http://www.w3.org/2000/svg");
 
 	const svgComponent = ${getCode()};
 	return svgComponent;
@@ -82,7 +84,7 @@ export default function vitePluginSvgVan(options = {}) {
   const {
     converterOptions,
     esbuildOptions,
-    include = ["*.svg?van"],
+    include = ["**/*.svg?van"],
     exclude,
   } = options;
   const filter = createFilter(include, exclude);
@@ -91,15 +93,14 @@ export default function vitePluginSvgVan(options = {}) {
   return {
     name: "vanjs-svg",
     enforce: "pre",
-    apply: "build",
     async load(id) {
       if (filter(id)) {
+        // try {
         const filePath = id.replace(postfixRE, "");
         const svgCode = await fs.promises.readFile(filePath, "utf8");
 
         // Transform SVG to VanJS component
         const componentCode = transformSvgToVanJS(svgCode, converterOptions);
-        // console.log('transformSvgToVanJS', componentCode);
 
         // Transform the component code using esbuild
         const result = await transformWithEsbuild(componentCode, id, {
@@ -107,13 +108,15 @@ export default function vitePluginSvgVan(options = {}) {
           ...esbuildOptions,
         });
 
-        console.log("transformWithEsbuild\n", result.code);
-
         return {
           code: result.code,
-          // code: componentCode,
           map: null,
         };
+        // istanbul ignore next
+        // } catch (error) {
+        // 	// istanbul ignore next
+        //   console.error(error);
+        // }
       }
       return null;
     },

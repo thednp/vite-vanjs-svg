@@ -13,15 +13,15 @@ export interface VitePluginSvgVanOptions {
 export declare const VitePluginVanSVG: (config?: VitePluginSvgVanOptions) => {
   name: "vanjs-svg";
   enforce: "pre" | "post" | undefined;
-  apply: "build";
   load: (id: string) => Promise<{ code: string; map: null } | null>;
 };
 export default VitePluginVanSVG;
 
 declare global {
   declare module "*.svg?van" {
-    const svg = (props?: PropsWithKnownKeys<SVGSVGElement>) =>
-      TagFunc<SVGSVGElement>;
-    export default svg;
+    const SVGTag: (
+      props?: PropsWithKnownKeys<SVGSVGElement>,
+    ) => TagFunc<SVGSVGElement>;
+    export default SVGTag;
   }
 }
