@@ -11,6 +11,8 @@
 
 A Vite plugin that transforms SVG files into VanJS components using [vanjs-converter](https://github.com/vanjs-org/converter).
 
+**Note:** The plugin will not resolve SVG files from the `/public` folder.
+
 
 ## Features
 * 🚀 Fast transformation using vanjs-converter
