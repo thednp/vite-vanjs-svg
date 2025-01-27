@@ -111,7 +111,10 @@ const app = () => {
   )
 }
 ```
-**Note** - style attribute only supports string value.
+**Notes**:
+ - style attribute only supports string value;
+ - `width`, `height`, `class` and `style` attributes are fully reactive.
+
 
 ## Contributing
 * Fork it!

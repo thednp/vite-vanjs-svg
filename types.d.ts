@@ -26,9 +26,9 @@ export default VitePluginVanSVG;
 declare global {
   declare module "*.svg?van" {
     const SVGTag: (
-      props?: PropsWithKnownKeys<SVGSVGElement> & {
+      props?: Partial<PropsWithKnownKeys<SVGSVGElement> & {
         class: PropValueOrDerived;
-      },
+      }>,
     ) => ReturnType<TagFunc<SVGSVGElement>>;
     export default SVGTag;
   }
