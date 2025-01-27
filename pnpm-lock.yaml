@@ -15,8 +15,8 @@ importers:
         specifier: ^2.2.3
         version: 2.2.3
       vanjs-converter:
-        specifier: ^0.2.0
-        version: 0.2.0
+        specifier: ^0.2.1
+        version: 0.2.1
       vanjs-core:
         specifier: ^1.5.3
         version: 1.5.3
@@ -1054,8 +1054,8 @@ packages:
   url-parse@1.5.10:
     resolution: {integrity: sha512-WypcfiRhfeUP9vvF0j6rw0J3hrWrw6iZv3+22h6iRMJ/8z1Tj6XfLP4DsUix5MhMPnXpiHDoKyoZ/bdCkwBCiQ==}
 
-  vanjs-converter@0.2.0:
-    resolution: {integrity: sha512-F8Zh8Wr9Zk1+tbE/WiP98FxBabIfVl0sQu05C+0l3Hmfxs7gYDVP8j9Zy9pb4S5TmNvY92QpRzUheb1l9xj7qw==}
+  vanjs-converter@0.2.1:
+    resolution: {integrity: sha512-Olvu3rYQ21ZKb/Bfv8+am6E+Twu+ZHUTw71JkmBqHq3LU6b1Dezfkq59vHyVrJNxHIY4YTTCiWXsUwmGCEff6Q==}
 
   vanjs-core@1.5.3:
     resolution: {integrity: sha512-NDt++52tE8rA7rcThaFtIJ7C3pEIuB51giOmE9o5dA9Cw3iv+a0tRIVVYP1PGLItXBbEL0wxDTa2VRjjuKIPlw==}
@@ -2157,7 +2157,7 @@ snapshots:
       querystringify: 2.2.0
       requires-port: 1.0.0
 
-  vanjs-converter@0.2.0:
+  vanjs-converter@0.2.1:
     dependencies:
       html-dom-parser: 4.0.1
       marked: 9.1.6

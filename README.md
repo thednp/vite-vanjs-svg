@@ -30,7 +30,7 @@ npm install -D vite-plugin-vanjs-svg
 ```
 
 ```bash
-pnpm install -D vite-plugin-vanjs-svg
+pnpm add -D vite-plugin-vanjs-svg
 ```
 
 ```bash
@@ -38,7 +38,11 @@ yarn add -D vite-plugin-vanjs-svg
 ```
 
 ```bash
-deno add npm:vite-plugin-vanjs-svg
+deno install npm:vite-plugin-vanjs-svg
+```
+
+```bash
+bun add vite-plugin-vanjs-svg
 ```
 
 
@@ -77,8 +81,10 @@ interface VitePluginVanSvgOptions {
 * `converterOptions`: [VanJSConverterOptions](https://github.com/vanjs-org/converter?tab=readme-ov-file#options) allows you to configure various formatting options;
 * `esbuildOptions`: [EsbuildTransformOptions](https://esbuild.github.io/api/#transform) esbuild will make sure the plugin will work seamless within the Vite ecosystem and provides some additional options;
   // filter options
-* `include`: filter option to **include** one or more RegExp for file IDs;
+* `include`: filter option to **include** one or more RegExp for file IDs; the default value is `["**/*.svg?van"]`;
 * `exclude`: filter option to **exclude** one or more RegExp for file IDs.
+
+**Note** - If you modify or add more include filters and you're using Typescript, you should also define new global modules.
 
 
 ### Typescript
@@ -100,23 +106,25 @@ const app = () => {
       width: 24,
       height: 24,
       class: 'my-icon',
-      style: { fill: 'currentColor' }
+      style: 'fill: "currentColor"'
     })
   )
 }
 ```
+**Note** - style attribute only supports string value.
 
 ## Contributing
 * Fork it!
 * Create your feature branch: `git checkout -b my-new-feature`
 * Commit your changes: `git commit -am 'Add some feature'`
-* Push to the branch: `git push origin `my-new-feature``
+* Push to the branch: `git push origin 'my-new-feature'`
 * Submit a pull request
 
 
 ## Acknowledgments
-* [vanjs-converter](https://github.com/vanjs-org/converter) - For the excellent SVG to VanJS conversion, it's way faster than SVGO
-* [vite-plugin-svgr](https://github.com/pd4d10/vite-plugin-svgr) - For inspiration on the plugin architecture
+* [vanjs-converter](https://github.com/vanjs-org/converter) - For the excellent SVG to VanJS conversion, it's faster than SVGO;
+* [JSON5](https://json5.org/) - For conversion of the SVG attributes to the object we use to set component attributes;
+* [vite-plugin-svgr](https://github.com/pd4d10/vite-plugin-svgr) - For inspiration on the plugin architecture.
 
 
 ## License

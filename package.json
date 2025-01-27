@@ -2,6 +2,23 @@
   "name": "vite-plugin-vanjs-svg",
   "version": "0.0.1",
   "description": "Vite plugin to transform SVGs into VanJS components",
+  "author": "thednp",
+  "license": "MIT",
+  "homepage": "https://github.com/thednp/vite-plugin-vanjs-svg#readme",
+  "keywords": [
+    "vite",
+    "plugin",
+    "svg",
+    "vanjs",
+    "vanjs-converter"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/thednp/vite-plugin-vanjs-svg"
+  },
+  "bugs": {
+    "url": "https://github.com/thednp/vite-plugin-vanjs-svg/issues"
+  },
   "main": "index.mjs",
   "module": "index.mjs",
   "types": "types.d.ts",
@@ -29,27 +46,10 @@
     "fix:ts": "deno lint index.mjs index.test.ts --fix",
     "check:ts": "tsc -noEmit"
   },
-  "keywords": [
-    "vite",
-    "plugin",
-    "svg",
-    "vanjs",
-    "vanjs-converter"
-  ],
-  "author": "thednp",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/thednp/vite-plugin-vanjs-svg"
-  },
-  "bugs": {
-    "url": "https://github.com/thednp/vite-plugin-vanjs-svg/issues"
-  },
-  "homepage": "https://github.com/thednp/vite-plugin-vanjs-svg#readme",
   "dependencies": {
     "@rollup/pluginutils": "^5.1.4",
     "json5": "^2.2.3",
-    "vanjs-converter": "^0.2.0",
+    "vanjs-converter": "^0.2.1",
     "vanjs-core": "^1.5.3"
   },
   "peerDependencies": {

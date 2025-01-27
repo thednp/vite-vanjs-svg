@@ -1,6 +1,11 @@
 import type { FilterPattern } from "@rollup/pluginutils";
 import { transformWithEsbuild } from "vite";
-import type { PropsWithKnownKeys, TagFunc } from "vanjs-core";
+import type {
+  PropsWithKnownKeys,
+  PropValueOrDerived,
+  State,
+  TagFunc,
+} from "vanjs-core";
 import type { HtmlToVanCodeOptions } from "vanjs-converter";
 
 export interface VitePluginSvgVanOptions {
@@ -20,8 +25,11 @@ export default VitePluginVanSVG;
 declare global {
   declare module "*.svg?van" {
     const SVGTag: (
-      props?: PropsWithKnownKeys<SVGElement>,
-    ) => ReturnType<TagFunc<SVGElement>>;
+      props?: PropsWithKnownKeys<SVGSVGElement> & {
+        // class: string | PropValueOrDerived | State<string>;
+        class: PropValueOrDerived;
+      },
+    ) => ReturnType<TagFunc<SVGSVGElement>>;
     export default SVGTag;
   }
 }
