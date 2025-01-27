@@ -9,6 +9,14 @@ on:
       - index.mjs
       - package.json
       - .github/workflows/ci.yml
+  pull_request:
+    branches:
+      - master
+    paths:
+      - index.test.ts
+      - index.mjs
+      - package.json
+      - .github/workflows/ci.yml
 
 jobs:
   build:
