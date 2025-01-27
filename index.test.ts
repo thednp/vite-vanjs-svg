@@ -25,6 +25,7 @@ describe("vite-plugin-vanjs-svg", () => {
     const svgPath = resolve(__dirname, "vanjs.svg");
 
     const result = await plugin.load?.(svgPath + "?van");
+    console.log(result);
     // const result = await plugin.load?.("./vanjs.svg?van");
     // if (!result) {
     //   throw new Error("Plugin did not return a result");
@@ -41,7 +42,7 @@ describe("vite-plugin-vanjs-svg", () => {
     expect(result.code).toContain("export default function SVGComponent");
 
     // Check if the component handles props
-    expect(result.code).toContain("props = {}");
+    expect(result.code).toContain("initialProps = {}");
 
     // Check if SVG content is included
     expect(result.code).toContain("viewBox");

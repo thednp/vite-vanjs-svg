@@ -20,7 +20,6 @@ function transformSvgToVanJS(svgCode, options = /* istanbul ignore next */ {}) {
   // Convert the SVG string directly to VanJS code using htmlToVanCode
   const vanCode = htmlToVanCode(svgCode, {
     ...options,
-    // htmlTagPred: (s) => s[0].toUpperCase() !== s[0],
   });
 
   /** @returns {string} */
@@ -40,19 +39,33 @@ function transformSvgToVanJS(svgCode, options = /* istanbul ignore next */ {}) {
         const { width, height, class: className, style, ...rest } =
           initialProps;
         const output = `
-svg({${
-          Object.entries(rest).map(([key, value]) => `"${key}": "${value}"`)
+const props = {
+  ${
+          Object.entries(rest)
+            .map(([key, value]) => `"${key}": "${value}"`)
             .join(",\n")
         },
-	width: van.derive(() => props.width || ${
+  width: van.derive(() => initialProps.width || ${
           width || /* istanbul ignore next */ '""'
         }),
-	height: van.derive(() => props.height || ${
+  height: van.derive(() => initialProps.height || ${
           height || /* istanbul ignore next */ '""'
         }),
-	class: van.derive(() => props.class || ${className || '""'}),
-	style: van.derive(() => props.style || ${style || '""'}),
-},
+};
+
+van.derive(() => {
+  if (initialProps.class) {
+    props.class = initialProps.class || ${className};
+  }
+});
+
+van.derive(() => {
+  if (initialProps.style) {
+    props.style = initialProps.style || ${style};
+  }
+});
+
+return svg(props,
 `.trim();
 
         result.push(output);
@@ -68,9 +81,9 @@ svg({${
   const componentCode = `
 import van from 'vanjs-core';
 
-export default function SVGComponent(props = {}) {
+export default function SVGComponent(initialProps = {}) {
 	const { ${vanCode.tags.join(", ")} } = van.tags("http://www.w3.org/2000/svg");
-	return ${getCode()};
+	${getCode()}
 }
 `.trim();
 
