@@ -1,10 +1,12 @@
 import fs from "node:fs";
+import path from "node:path";
 import JSON5 from "json5";
 import { transformWithEsbuild } from "vite";
 import { createFilter } from "@rollup/pluginutils";
 import { htmlToVanCode } from "vanjs-converter";
 
 /** @typedef {import("vanjs-core").PropsWithKnownKeys<SVGSVGElement>} PropsWithKnownKeys */
+/** @typedef {import("vite").UserConfig} UserConfig */
 /** @typedef {typeof import("./types.d.ts").VitePluginVanSVG} VitePluginVanSVG */
 /** @typedef {import("vanjs-converter").HtmlToVanCodeOptions} HtmlToVanCodeOptions */
 
@@ -85,13 +87,27 @@ export default function vitePluginSvgVan(options = {}) {
   } = options;
   const filter = createFilter(include, exclude);
   const postfixRE = /[?#].*$/s;
+  /** @type {UserConfig} */
+  let config;
 
   return {
     name: "vanjs-svg",
     enforce: "pre",
+    // istanbul ignore next - impossible to test outside of vite runtime
+    configResolved(cfg) {
+      config = cfg;
+    },
     async load(id) {
       if (filter(id)) {
-        const filePath = id.replace(postfixRE, "");
+        const file = id.replace(postfixRE, "");
+        // Resolve the file path
+        const filePath = file.startsWith("/") && config?.publicDir
+          ? /* istanbul ignore next */ path.resolve(
+            config.publicDir,
+            file.slice(1),
+          )
+          : file;
+        // Read the SVG file
         const svgCode = await fs.promises.readFile(filePath, "utf8");
 
         // Transform SVG to VanJS component
