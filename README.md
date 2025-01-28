@@ -38,11 +38,11 @@ yarn add -D vite-plugin-vanjs-svg
 ```
 
 ```bash
-deno install npm:vite-plugin-vanjs-svg
+deno add npm:vite-plugin-vanjs-svg
 ```
 
 ```bash
-bun add vite-plugin-vanjs-svg
+bun install vite-plugin-vanjs-svg
 ```
 
 
@@ -113,7 +113,7 @@ const app = () => {
 ```
 **Notes**:
  - style attribute only supports string value;
- - `width`, `height`, `class` and `style` attributes are fully reactive.
+ - `fill`, `fillOpacity`, `stroke`, `strokeWidth`, `strokeOpacity`, `transform`, `width`, `height`, `class` and `style` attributes are fully reactive.
 
 
 ## Contributing

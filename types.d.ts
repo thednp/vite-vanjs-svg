@@ -1,3 +1,4 @@
+/// <reference path="global.d.ts" />
 import type { FilterPattern } from "@rollup/pluginutils";
 import { transformWithEsbuild, type UserConfig } from "vite";
 import type {
@@ -22,15 +23,3 @@ export declare const VitePluginVanSVG: (config?: VitePluginSvgVanOptions) => {
   load: (id: string) => Promise<{ code: string; map: null } | null>;
 };
 export default VitePluginVanSVG;
-
-declare global {
-  declare module "*.svg?van" {
-    type SVGProps = PropsWithKnownKeys<SVGSVGElement> & {
-      class: PropValueOrDerived;
-    };
-    const SVGTag: (
-      props?: Partial<SVGProps>,
-    ) => ReturnType<TagFunc<SVGSVGElement>>;
-    export default SVGTag;
-  }
-}

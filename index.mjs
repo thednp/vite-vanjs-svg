@@ -36,7 +36,7 @@ function transformSvgToVanJS(svgCode, options = /* istanbul ignore next */ {}) {
         const initialProps = JSON5.parse(
           code.replace("svg(", "").replace("},", "}"),
         );
-        const { width, height, class: className, style, ...rest } =
+        const { transform, stroke, strokeOpacity, strokeWidth, fill, fillOpacity, width, height, class: className, style, ...rest } =
           initialProps;
         const output = `
 const props = {
@@ -45,13 +45,49 @@ const props = {
             .map(([key, value]) => `"${key}": "${value}"`)
             .join(",\n")
         },
-  width: van.derive(() => initialProps.width || ${
-          width || /* istanbul ignore next */ '""'
-        }),
-  height: van.derive(() => initialProps.height || ${
-          height || /* istanbul ignore next */ '""'
-        }),
 };
+
+van.derive(() => {
+  if (initialProps.fill) {
+    props.fill = initialProps.fill || ${fill};
+  }
+});
+
+van.derive(() => {
+  if (initialProps.fillOpacity) {
+    props.fillOpacity = initialProps.fillOpacity || ${fillOpacity};
+  }
+});
+
+van.derive(() => {
+  if (initialProps.stroke) {
+    props.stroke = initialProps.stroke || ${stroke};
+  }
+});
+
+van.derive(() => {
+  if (initialProps.strokeOpacity) {
+    props.strokeOpacity = initialProps.strokeOpacity || ${strokeOpacity};
+  }
+});
+
+van.derive(() => {
+  if (initialProps.strokeWidth) {
+    props.strokeWidth = initialProps.strokeWidth || ${strokeWidth};
+  }
+});
+
+van.derive(() => {
+  if (["null", null].every(w => w !== initialProps.width)) {
+    props.width = initialProps.width || ${width};
+  }
+});
+
+van.derive(() => {
+  if (["null", null].every(h => h !== initialProps.height)) {
+    props.height = initialProps.height || ${height};
+  }
+});
 
 van.derive(() => {
   if (initialProps.class) {
@@ -62,6 +98,12 @@ van.derive(() => {
 van.derive(() => {
   if (initialProps.style) {
     props.style = initialProps.style || ${style};
+  }
+});
+
+van.derive(() => {
+  if (initialProps.transform) {
+    props.transform = initialProps.transform || ${transform};
   }
 });
 
