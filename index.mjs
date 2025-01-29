@@ -36,8 +36,19 @@ function transformSvgToVanJS(svgCode, options = /* istanbul ignore next */ {}) {
         const initialProps = JSON5.parse(
           code.replace("svg(", "").replace("},", "}"),
         );
-        const { transform, stroke, strokeOpacity, strokeWidth, fill, fillOpacity, width, height, class: className, style, ...rest } =
-          initialProps;
+        const {
+          transform,
+          stroke,
+          strokeOpacity,
+          strokeWidth,
+          fill,
+          fillOpacity,
+          width,
+          height,
+          class: className,
+          style,
+          ...rest
+        } = initialProps;
         const output = `
 const props = {
   ${
