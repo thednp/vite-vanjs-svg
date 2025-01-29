@@ -19,6 +19,8 @@ import { htmlToVanCode } from "vanjs-converter";
 function transformSvgToVanJS(svgCode, options = /* istanbul ignore next */ {}) {
   // Convert the SVG string directly to VanJS code using htmlToVanCode
   const vanCode = htmlToVanCode(svgCode, {
+    indent: 0,
+    skipEmptyText: true,
     ...options,
   });
 
