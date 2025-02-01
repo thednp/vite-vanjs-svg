@@ -29,6 +29,7 @@
   "include": [
     "./index.test.ts",
     "./types.d.ts",
+    "@vanjs/parser",
   ],
   "exclude": ["node_modules", "experiments", "coverage"],
 }

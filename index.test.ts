@@ -25,7 +25,7 @@ describe("vite-plugin-vanjs-svg", () => {
     const svgPath = resolve(__dirname, "vanjs.svg");
 
     const result = await plugin.load?.(svgPath + "?van");
-    // console.log(result);
+    console.log(result);
 
     if (!result) return;
 

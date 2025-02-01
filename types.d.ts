@@ -1,4 +1,6 @@
 /// <reference path="global.d.ts" />
+/// <reference types="vite-plugin-vanjs" />
+
 import type { FilterPattern } from "@rollup/pluginutils";
 import { transformWithEsbuild, type UserConfig } from "vite";
 import type {

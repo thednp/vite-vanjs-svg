@@ -1,135 +1,112 @@
 import fs from "node:fs";
 import path from "node:path";
-import JSON5 from "json5";
 import { transformWithEsbuild } from "vite";
 import { createFilter } from "@rollup/pluginutils";
-import { htmlToVanCode } from "vanjs-converter";
+import { htmlToVanCode, quoteText } from "@vanjs/parser";
 
 /** @typedef {import("vanjs-core").PropsWithKnownKeys<SVGSVGElement>} PropsWithKnownKeys */
 /** @typedef {import("vite").UserConfig} UserConfig */
 /** @typedef {typeof import("./types.d.ts").VitePluginVanSVG} VitePluginVanSVG */
-/** @typedef {import("vanjs-converter").HtmlToVanCodeOptions} HtmlToVanCodeOptions */
 
 /**
  * Compiles SVGs to VanJS component code
  * @param {string} svgCode
- * @param {HtmlToVanCodeOptions} options
  * @returns {string} the compiled code
  */
-function transformSvgToVanJS(svgCode, options = /* istanbul ignore next */ {}) {
+function transformSvgToVanJS(svgCode) {
   // Convert the SVG string directly to VanJS code using htmlToVanCode
-  const vanCode = htmlToVanCode(svgCode, {
-    indent: 0,
-    skipEmptyText: true,
-    ...options,
-  });
+  const vanCode = htmlToVanCode(svgCode, "props");
 
   /** @returns {string} */
   const getCode = () => {
-    let isInitialProps = false;
-    /** @type {string[]} */
-    const result = [];
-    vanCode.code.forEach((code) => {
-      if (
-        ["xmlns", "viewBox"].some((c) => code.includes(c)) &&
-        !isInitialProps
-      ) {
-        isInitialProps = true;
-        const initialProps = JSON5.parse(
-          code.replace("svg(", "").replace("},", "}"),
-        );
-        const {
-          transform,
-          stroke,
-          strokeOpacity,
-          strokeWidth,
-          fill,
-          fillOpacity,
-          width,
-          height,
-          class: className,
-          style,
-          ...rest
-        } = initialProps;
-        const output = `
+    const {
+      transform,
+      stroke,
+      strokeOpacity,
+      strokeWidth,
+      fill,
+      fillOpacity,
+      width,
+      height,
+      class: className,
+      style,
+      ...rest
+    } = vanCode.attributes;
+
+    const output = `
 const props = {
   ${
-          Object.entries(rest)
-            .map(([key, value]) => `"${key}": "${value}"`)
-            .join(",\n")
-        },
+      Object.entries(rest)
+        // .map(([key, value]) => `"${key}": "${value}"`)
+        .map(([key, value]) => `${quoteText(key)}: "${value}"`)
+        .join(",\n")
+    },
 };
 
 van.derive(() => {
   if (initialProps.fill) {
-    props.fill = initialProps.fill || ${fill};
+    props.fill = initialProps.fill || ${fill || `""`};
   }
 });
 
 van.derive(() => {
   if (initialProps.fillOpacity) {
-    props.fillOpacity = initialProps.fillOpacity || ${fillOpacity};
+    props.fillOpacity = initialProps.fillOpacity || ${fillOpacity || `""`};
   }
 });
 
 van.derive(() => {
   if (initialProps.stroke) {
-    props.stroke = initialProps.stroke || ${stroke};
+    props.stroke = initialProps.stroke || ${stroke || `""`};
   }
 });
 
 van.derive(() => {
   if (initialProps.strokeOpacity) {
-    props.strokeOpacity = initialProps.strokeOpacity || ${strokeOpacity};
+    props.strokeOpacity = initialProps.strokeOpacity || ${strokeOpacity || `""`};
   }
 });
 
 van.derive(() => {
   if (initialProps.strokeWidth) {
-    props.strokeWidth = initialProps.strokeWidth || ${strokeWidth};
+    props.strokeWidth = initialProps.strokeWidth || ${strokeWidth || `""`};
   }
 });
 
 van.derive(() => {
   if (["null", null].every(w => w !== initialProps.width)) {
-    props.width = initialProps.width || ${width};
+    props.width = initialProps.width || ${width || `""`};
   }
 });
 
 van.derive(() => {
   if (["null", null].every(h => h !== initialProps.height)) {
-    props.height = initialProps.height || ${height};
+    props.height = initialProps.height || ${height || `""`};
   }
 });
 
 van.derive(() => {
   if (initialProps.class) {
-    props.class = initialProps.class || ${className};
+    props.class = initialProps.class || ${className || `""`};
   }
 });
 
 van.derive(() => {
   if (initialProps.style) {
-    props.style = initialProps.style || ${style};
+    props.style = initialProps.style || ${style || `""`};
   }
 });
 
 van.derive(() => {
   if (initialProps.transform) {
-    props.transform = initialProps.transform || ${transform};
+    props.transform = initialProps.transform || ${transform || `""`};
   }
 });
 
-return svg(props,
+return ${vanCode.code};
 `.trim();
 
-        result.push(output);
-        return;
-      }
-      result.push(code);
-    });
-
-    return result.join("\n");
+    return output;
   };
 
   // Wrap the converted code in a component
@@ -148,7 +125,6 @@ export default function SVGComponent(initialProps = {}) {
 /** @type {VitePluginVanSVG} */
 export default function vitePluginSvgVan(options = {}) {
   const {
-    converterOptions,
     esbuildOptions,
     include = ["**/*.svg?van"],
     exclude,
@@ -179,7 +155,7 @@ export default function vitePluginSvgVan(options = {}) {
         const svgCode = await fs.promises.readFile(filePath, "utf8");
 
         // Transform SVG to VanJS component
-        const componentCode = transformSvgToVanJS(svgCode, converterOptions);
+        const componentCode = transformSvgToVanJS(svgCode);
 
         // Transform the component code using esbuild
         const result = await transformWithEsbuild(componentCode, id, {
