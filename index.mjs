@@ -2,7 +2,8 @@ import fs from "node:fs";
 import path from "node:path";
 import { transformWithEsbuild } from "vite";
 import { createFilter } from "@rollup/pluginutils";
-import { htmlToVanCode, quoteText } from "@vanjs/parser";
+// import { htmlToVanCode, quoteText } from "@vanjs/parser";
+import { htmlToVanCode, quoteText } from "vite-plugin-vanjs/parser";
 
 /** @typedef {import("vanjs-core").PropsWithKnownKeys<SVGSVGElement>} PropsWithKnownKeys */
 /** @typedef {import("vite").UserConfig} UserConfig */
@@ -63,7 +64,9 @@ van.derive(() => {
 
 van.derive(() => {
   if (initialProps.strokeOpacity) {
-    props.strokeOpacity = initialProps.strokeOpacity || ${strokeOpacity || `""`};
+    props.strokeOpacity = initialProps.strokeOpacity || ${
+      strokeOpacity || `""`
+    };
   }
 });
 
@@ -75,13 +78,17 @@ van.derive(() => {
 
 van.derive(() => {
   if (["null", null].every(w => w !== initialProps.width)) {
-    props.width = initialProps.width || ${width || `""`};
+    props.width = initialProps.width || ${
+      width || /* istanbul ignore next @preserve */ `""`
+    };
   }
 });
 
 van.derive(() => {
   if (["null", null].every(h => h !== initialProps.height)) {
-    props.height = initialProps.height || ${height || `""`};
+    props.height = initialProps.height || ${
+      height || /* istanbul ignore next @preserve */ `""`
+    };
   }
 });
 
