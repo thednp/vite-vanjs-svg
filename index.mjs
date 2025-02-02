@@ -2,8 +2,8 @@ import fs from "node:fs";
 import path from "node:path";
 import { transformWithEsbuild } from "vite";
 import { createFilter } from "@rollup/pluginutils";
-import { htmlToVanCode, quoteText } from "@vanjs/parser";
-// import { htmlToVanCode, quoteText } from "vite-plugin-vanjs/parser";
+// import { htmlToVanCode, quoteText } from "@vanjs/parser";
+import { htmlToVanCode, quoteText } from "vite-plugin-vanjs/parser";
 
 /** @typedef {import("vanjs-core").PropsWithKnownKeys<SVGSVGElement>} PropsWithKnownKeys */
 /** @typedef {import("vite").UserConfig} UserConfig */
@@ -144,16 +144,6 @@ export default function vitePluginSvgVan(options = {}) {
   return {
     name: "vanjs-svg",
     enforce: "pre",
-    config() {
-      /* istanbul ignore next @preserve */
-      return {
-        resolve: {
-          alias: {
-            "@vanjs/*": "vite-plugin-vanjs/*",
-          },
-        },
-      };
-    },
     // istanbul ignore next - impossible to test outside of vite runtime
     configResolved(cfg) {
       config = cfg;
