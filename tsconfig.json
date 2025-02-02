@@ -29,7 +29,7 @@
   "include": [
     "./index.test.ts",
     "./types.d.ts",
-    "@vanjs/parser",
+    // "vite-plugin-vanjs/parser",
   ],
   "exclude": ["node_modules", "experiments", "coverage"],
 }
