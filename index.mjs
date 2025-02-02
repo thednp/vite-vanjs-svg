@@ -7,16 +7,18 @@ import { htmlToVanCode, quoteText } from "vite-plugin-vanjs/parser";
 
 /** @typedef {import("vanjs-core").PropsWithKnownKeys<SVGSVGElement>} PropsWithKnownKeys */
 /** @typedef {import("vite").UserConfig} UserConfig */
+/** @typedef {import("vite-plugin-vanjs").ConvertedOptions} ConvertedOptions */
 /** @typedef {typeof import("./types.d.ts").VitePluginVanSVG} VitePluginVanSVG */
 
 /**
  * Compiles SVGs to VanJS component code
  * @param {string} svgCode
+ * @param {ConvertedOptions} converterOptions
  * @returns {string} the compiled code
  */
-function transformSvgToVanJS(svgCode) {
+function transformSvgToVanJS(svgCode, converterOptions = {}) {
   // Convert the SVG string directly to VanJS code using htmlToVanCode
-  const vanCode = htmlToVanCode(svgCode, "props");
+  const vanCode = htmlToVanCode(svgCode, { ...converterOptions, replacement: "props" });
 
   /** @returns {string} */
   const getCode = () => {
@@ -132,6 +134,7 @@ export default function SVGComponent(initialProps = {}) {
 /** @type {VitePluginVanSVG} */
 export default function vitePluginSvgVan(options = {}) {
   const {
+    converterOptions,
     esbuildOptions,
     include = ["**/*.svg?van"],
     exclude,
@@ -162,7 +165,7 @@ export default function vitePluginSvgVan(options = {}) {
         const svgCode = await fs.promises.readFile(filePath, "utf8");
 
         // Transform SVG to VanJS component
-        const componentCode = transformSvgToVanJS(svgCode);
+        const componentCode = transformSvgToVanJS(svgCode, converterOptions);
 
         // Transform the component code using esbuild
         const result = await transformWithEsbuild(componentCode, id, {

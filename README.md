@@ -15,7 +15,7 @@ A Vite plugin that transforms SVG files into VanJS components using the [DOMPars
 
 
 ## Features
-* 🚀 Fast transformation using vanjs-converter
+* 🚀 Fast transformation using [DOMParser](https://github.com/thednp/domparser)
 * 🎯 TypeScript support
 * 🔧 Configurable transformation options
 * 💪 Full props support (className, style, events, etc.)
@@ -69,7 +69,7 @@ While the default options work just fine, for your convenience the plugin allows
 ```ts
 interface VitePluginVanSvgOptions {
   // vanjs-converter options
-  converterOptions?: VanJSConverterOptions;
+  converterOptions?: ParserOptions;
   // esbuild transform options
   esbuildOptions?: EsbuildTransformOPtions;
   // filter options
@@ -78,7 +78,7 @@ interface VitePluginVanSvgOptions {
 }
 ```
 
-* `converterOptions`: [VanJSConverterOptions](https://github.com/vanjs-org/converter?tab=readme-ov-file#options) allows you to configure various formatting options;
+* `converterOptions`: [ParserOptions](https://github.com/thednp/domparser?tab=readme-ov-file#options) allows you to configure sanitization options;
 * `esbuildOptions`: [EsbuildTransformOptions](https://esbuild.github.io/api/#transform) esbuild will make sure the plugin will work seamless within the Vite ecosystem and provides some additional options;
   // filter options
 * `include`: filter option to **include** one or more RegExp for file IDs; the default value is `["**/*.svg?van"]`;

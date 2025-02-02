@@ -16,7 +16,7 @@ importers:
         version: 1.5.3
       vite-plugin-vanjs:
         specifier: github:thednp/vite-plugin-vanjs
-        version: https://codeload.github.com/thednp/vite-plugin-vanjs/tar.gz/21505c491068d41ed534a89c274590303de1cafb(csstype@3.1.3)(mini-van-plate@0.6.3)(vanjs-core@1.5.3)(vanjs-ext@0.6.2)
+        version: https://codeload.github.com/thednp/vite-plugin-vanjs/tar.gz/64b72c3aa6aad04a476d904efddaebac7e751129(csstype@3.1.3)(mini-van-plate@0.6.3)(vanjs-core@1.5.3)(vanjs-ext@0.6.2)
     devDependencies:
       '@types/node':
         specifier: ^22.13.0
@@ -272,25 +272,36 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@inquirer/confirm@5.1.4':
-    resolution: {integrity: sha512-EsiT7K4beM5fN5Mz6j866EFA9+v9d5o9VUra3hrg8zY4GHmCS8b616FErbdo5eyKoVotBQkHzMIeeKYsKDStDw==}
+  '@inquirer/confirm@5.1.5':
+    resolution: {integrity: sha512-ZB2Cz8KeMINUvoeDi7IrvghaVkYT2RB0Zb31EaLWOE87u276w4wnApv0SH2qWaJ3r0VSUa3BIuz7qAV2ZvsZlg==}
     engines: {node: '>=18'}
     peerDependencies:
       '@types/node': '>=18'
+    peerDependenciesMeta:
+      '@types/node':
+        optional: true
 
-  '@inquirer/core@10.1.5':
-    resolution: {integrity: sha512-/vyCWhET0ktav/mUeBqJRYTwmjFPIKPRYb3COAw7qORULgipGSUO2vL32lQKki3UxDKJ8BvuEbokaoyCA6YlWw==}
+  '@inquirer/core@10.1.6':
+    resolution: {integrity: sha512-Bwh/Zk6URrHwZnSSzAZAKH7YgGYi0xICIBDFOqBQoXNNAzBHw/bgXgLmChfp+GyR3PnChcTbiCTZGC6YJNJkMA==}
     engines: {node: '>=18'}
+    peerDependencies:
+      '@types/node': '>=18'
+    peerDependenciesMeta:
+      '@types/node':
+        optional: true
 
   '@inquirer/figures@1.0.10':
     resolution: {integrity: sha512-Ey6176gZmeqZuY/W/nZiUyvmb1/qInjcpiZjXWi6nON+nxJpD1bxtSoBxNliGISae32n6OwbY+TSXPZ1CfS4bw==}
     engines: {node: '>=18'}
 
-  '@inquirer/type@3.0.3':
-    resolution: {integrity: sha512-I4VIHFxUuY1bshGbXZTxCmhwaaEst9s/lll3ekok+o1Z26/ZUKdx8y1b7lsoG6rtsBDwEGfiBJ2SfirjoISLpg==}
+  '@inquirer/type@3.0.4':
+    resolution: {integrity: sha512-2MNFrDY8jkFYc9Il9DgLsHhMzuHnOYM1+CUYVWbzu9oT0hC7V7EcYvdCKeoll/Fcci04A+ERZ9wcc7cQ8lTkIA==}
     engines: {node: '>=18'}
     peerDependencies:
       '@types/node': '>=18'
+    peerDependenciesMeta:
+      '@types/node':
+        optional: true
 
   '@isaacs/cliui@8.0.2':
     resolution: {integrity: sha512-O8jcjabXaleOG9DQ0+ARXWZBTfnP4WNAqzuiJK7ll44AmxGKv/J2M4TPjxjY3znBCfvBXFzucm1twdyFybFqEA==}
@@ -452,8 +463,8 @@ packages:
     peerDependencies:
       '@testing-library/dom': '>=7.21.4'
 
-  '@thednp/domparser@https://codeload.github.com/thednp/domparser/tar.gz/0e4021fdc1ceb44cbf46d0450f54fa734e596511':
-    resolution: {tarball: https://codeload.github.com/thednp/domparser/tar.gz/0e4021fdc1ceb44cbf46d0450f54fa734e596511}
+  '@thednp/domparser@https://codeload.github.com/thednp/domparser/tar.gz/6b1c1a71dd6b508f345105fcf28e2725827b5abd':
+    resolution: {tarball: https://codeload.github.com/thednp/domparser/tar.gz/6b1c1a71dd6b508f345105fcf28e2725827b5abd}
     version: 0.0.1
     engines: {node: '>=20', pnpm: '>=8.6.0'}
 
@@ -1045,8 +1056,8 @@ packages:
     engines: {node: ^18.0.0 || ^20.0.0 || >=22.0.0}
     hasBin: true
 
-  vite-plugin-vanjs@https://codeload.github.com/thednp/vite-plugin-vanjs/tar.gz/21505c491068d41ed534a89c274590303de1cafb:
-    resolution: {tarball: https://codeload.github.com/thednp/vite-plugin-vanjs/tar.gz/21505c491068d41ed534a89c274590303de1cafb}
+  vite-plugin-vanjs@https://codeload.github.com/thednp/vite-plugin-vanjs/tar.gz/64b72c3aa6aad04a476d904efddaebac7e751129:
+    resolution: {tarball: https://codeload.github.com/thednp/vite-plugin-vanjs/tar.gz/64b72c3aa6aad04a476d904efddaebac7e751129}
     version: 0.0.6
     engines: {node: '>=20', pnpm: '>=8.6.0'}
     peerDependencies:
@@ -1381,29 +1392,30 @@ snapshots:
   '@esbuild/win32-x64@0.24.2':
     optional: true
 
-  '@inquirer/confirm@5.1.4(@types/node@22.13.0)':
+  '@inquirer/confirm@5.1.5(@types/node@22.13.0)':
     dependencies:
-      '@inquirer/core': 10.1.5(@types/node@22.13.0)
-      '@inquirer/type': 3.0.3(@types/node@22.13.0)
+      '@inquirer/core': 10.1.6(@types/node@22.13.0)
+      '@inquirer/type': 3.0.4(@types/node@22.13.0)
+    optionalDependencies:
       '@types/node': 22.13.0
 
-  '@inquirer/core@10.1.5(@types/node@22.13.0)':
+  '@inquirer/core@10.1.6(@types/node@22.13.0)':
     dependencies:
       '@inquirer/figures': 1.0.10
-      '@inquirer/type': 3.0.3(@types/node@22.13.0)
+      '@inquirer/type': 3.0.4(@types/node@22.13.0)
       ansi-escapes: 4.3.2
       cli-width: 4.1.0
       mute-stream: 2.0.0
       signal-exit: 4.1.0
       wrap-ansi: 6.2.0
       yoctocolors-cjs: 2.1.2
-    transitivePeerDependencies:
-      - '@types/node'
+    optionalDependencies:
+      '@types/node': 22.13.0
 
   '@inquirer/figures@1.0.10': {}
 
-  '@inquirer/type@3.0.3(@types/node@22.13.0)':
-    dependencies:
+  '@inquirer/type@3.0.4(@types/node@22.13.0)':
+    optionalDependencies:
       '@types/node': 22.13.0
 
   '@isaacs/cliui@8.0.2':
@@ -1537,7 +1549,7 @@ snapshots:
     dependencies:
       '@testing-library/dom': 10.4.0
 
-  '@thednp/domparser@https://codeload.github.com/thednp/domparser/tar.gz/0e4021fdc1ceb44cbf46d0450f54fa734e596511': {}
+  '@thednp/domparser@https://codeload.github.com/thednp/domparser/tar.gz/6b1c1a71dd6b508f345105fcf28e2725827b5abd': {}
 
   '@types/aria-query@5.0.4': {}
 
@@ -1913,7 +1925,7 @@ snapshots:
       '@bundled-es-modules/cookie': 2.0.1
       '@bundled-es-modules/statuses': 1.0.1
       '@bundled-es-modules/tough-cookie': 0.1.6
-      '@inquirer/confirm': 5.1.4(@types/node@22.13.0)
+      '@inquirer/confirm': 5.1.5(@types/node@22.13.0)
       '@mswjs/interceptors': 0.37.6
       '@open-draft/deferred-promise': 2.2.0
       '@open-draft/until': 2.1.0
@@ -2145,9 +2157,9 @@ snapshots:
       - tsx
       - yaml
 
-  vite-plugin-vanjs@https://codeload.github.com/thednp/vite-plugin-vanjs/tar.gz/21505c491068d41ed534a89c274590303de1cafb(csstype@3.1.3)(mini-van-plate@0.6.3)(vanjs-core@1.5.3)(vanjs-ext@0.6.2):
+  vite-plugin-vanjs@https://codeload.github.com/thednp/vite-plugin-vanjs/tar.gz/64b72c3aa6aad04a476d904efddaebac7e751129(csstype@3.1.3)(mini-van-plate@0.6.3)(vanjs-core@1.5.3)(vanjs-ext@0.6.2):
     dependencies:
-      '@thednp/domparser': https://codeload.github.com/thednp/domparser/tar.gz/0e4021fdc1ceb44cbf46d0450f54fa734e596511
+      '@thednp/domparser': https://codeload.github.com/thednp/domparser/tar.gz/6b1c1a71dd6b508f345105fcf28e2725827b5abd
       csstype: 3.1.3
       mini-van-plate: 0.6.3
       vanjs-core: 1.5.3
