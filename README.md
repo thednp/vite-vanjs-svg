@@ -9,7 +9,7 @@
 [![vite version](https://img.shields.io/badge/vite-6.0.11-brightgreen)](https://vite.dev)
 
 
-A Vite plugin that transforms SVG files into VanJS components using the [DOMParser](https://github.com/thednp/domparser) and [vite-plugin-vanjs](https://github.com/thednp/vite-plugin-vanjs).
+A Vite plugin that transforms SVG files into VanJS components using the [DOMParser](https://github.com/thednp/domparser).
 
 **Note:** The plugin will also resolve SVG files from the `/public` folder or any valid `viteConfig.publicDir` option.
 
@@ -68,8 +68,6 @@ While the default options work just fine, for your convenience the plugin allows
 
 ```ts
 interface VitePluginVanSvgOptions {
-  // vanjs-converter options
-  converterOptions?: ParserOptions;
   // esbuild transform options
   esbuildOptions?: EsbuildTransformOPtions;
   // filter options
@@ -78,7 +76,6 @@ interface VitePluginVanSvgOptions {
 }
 ```
 
-* `converterOptions`: [ParserOptions](https://github.com/thednp/domparser?tab=readme-ov-file#options) allows you to configure sanitization options;
 * `esbuildOptions`: [EsbuildTransformOptions](https://esbuild.github.io/api/#transform) esbuild will make sure the plugin will work seamless within the Vite ecosystem and provides some additional options;
   // filter options
 * `include`: filter option to **include** one or more RegExp for file IDs; the default value is `["**/*.svg?van"]`;
@@ -125,8 +122,7 @@ const app = () => {
 
 
 ## Acknowledgments
-* [vanjs-converter](https://github.com/vanjs-org/converter) - For the excellent SVG to VanJS conversion, it's faster than SVGO;
-* [JSON5](https://json5.org/) - For conversion of the SVG attributes to the object we use to set component attributes;
+* [vanjs-converter](https://github.com/vanjs-org/converter) - For the first prototype version of the plugin;
 * [vite-plugin-svgr](https://github.com/pd4d10/vite-plugin-svgr) - For inspiration on the plugin architecture.
 
 

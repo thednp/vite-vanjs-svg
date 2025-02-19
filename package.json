@@ -9,8 +9,7 @@
     "vite",
     "plugin",
     "svg",
-    "vanjs",
-    "vanjs-converter"
+    "vanjs"
   ],
   "repository": {
     "type": "git",
@@ -19,19 +18,20 @@
   "bugs": {
     "url": "https://github.com/thednp/vite-plugin-vanjs-svg/issues"
   },
-  "main": "index.mjs",
-  "module": "index.mjs",
-  "types": "types.d.ts",
+  "main": "src/index.mjs",
+  "module": "src/index.mjs",
+  "types": "src/types.d.ts",
   "exports": {
     ".": {
-      "import": "./index.mjs",
-      "types": "./types.d.ts"
+      "import": "./src/index.mjs",
+      "types": "./src/types.d.ts"
     }
   },
   "files": [
-    "index.mjs",
-    "index.test.ts",
-    "types.d.ts",
+    "src/index.mjs",
+    "src/htmlToVanCode.mjs",
+    "src/index.test.ts",
+    "src/types.d.ts",
     "README.md",
     "LICENSE"
   ],
@@ -47,23 +47,23 @@
     "check:ts": "tsc -noEmit"
   },
   "dependencies": {
+    "@thednp/domparser": "github:thednp/domparser",
     "@rollup/pluginutils": "^5.1.4",
-    "vanjs-core": "^1.5.3",
-    "vite-plugin-vanjs": "github:thednp/vite-plugin-vanjs"
+    "vanjs-core": "^1.5.3"
   },
   "peerDependencies": {
+    "@thednp/domparser": "*",
     "vanjs-core": "^1.2.0",
-    "vite": "^5.0.0 || ^6.0.0",
-    "vite-plugin-vanjs": "*"
+    "vite": "^5.0.0 || ^6.0.0"
   },
   "devDependencies": {
-    "@types/node": "^22.13.0",
-    "@vitest/browser": "^3.0.4",
-    "@vitest/coverage-istanbul": "^3.0.4",
-    "@vitest/ui": "^3.0.4",
+    "@types/node": "^22.13.4",
+    "@vitest/browser": "^3.0.6",
+    "@vitest/coverage-istanbul": "^3.0.6",
+    "@vitest/ui": "^3.0.6",
     "typescript": "5.6.2",
-    "vite": "^6.0.11",
-    "vitest": "^3.0.4"
+    "vite": "^6.1.1",
+    "vitest": "^3.0.6"
   },
   "packageManager": "pnpm@8.6.12",
   "engines": {

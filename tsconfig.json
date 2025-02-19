@@ -27,9 +27,8 @@
     "checkJs": true,
   },
   "include": [
-    "./index.test.ts",
-    "./types.d.ts",
-    // "vite-plugin-vanjs/parser",
+    "./src/index.test.ts",
+    "./src/types.d.ts",
   ],
   "exclude": ["node_modules", "experiments", "coverage"],
 }

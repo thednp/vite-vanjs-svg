@@ -1,15 +1,15 @@
 import { defineConfig } from "vitest/config";
-import vanjs from "vite-plugin-vanjs";
+// import vanjs from "vite-plugin-vanjs";
 
 export default defineConfig({
-  plugins: [vanjs()],
+  // plugins: [vanjs()],
   test: {
     coverage: {
       provider: "istanbul",
       reporter: ["html", "text", "lcov"],
       enabled: true,
       include: [
-        "index.mjs"
+        "src/index.mjs"
       ],
     },
   },

@@ -1,7 +1,7 @@
 import { fileURLToPath } from "node:url";
 import { dirname, resolve } from "node:path";
 import { describe, expect, it } from "vitest";
-import { VitePluginSvgVanOptions } from "types";
+import { VitePluginSvgVanOptions } from "./types";
 
 // import plugin
 import svgVan from "./index.mjs";
@@ -59,7 +59,6 @@ describe("vite-plugin-vanjs-svg", () => {
 
   it("should accept plugin options", () => {
     const options: Partial<VitePluginSvgVanOptions> = {
-      converterOptions: { indent: 2 },
       include: "**/*.svg",
     };
     const plugin = svgVan(options);
