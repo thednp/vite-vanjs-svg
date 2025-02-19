@@ -40,10 +40,10 @@
     "test-ui": "vitest --config vitest.config.mts --ui=true",
     "prepublishOnly": "pnpm up && pnpm lint && pnpm format && pnpm badges",
     "badges": "npx -p dependency-version-badge update-badge vanjs-core typescript vitest vite",
-    "format": "deno fmt index.mjs index.test.ts types.d.ts",
+    "format": "deno fmt src/index.mjs src/index.test.ts src/types.d.ts",
     "lint": "pnpm lint:ts && pnpm check:ts",
-    "lint:ts": "deno lint index.mjs index.test.ts",
-    "fix:ts": "deno lint index.mjs index.test.ts --fix",
+    "lint:ts": "deno lint src/index.mjs src/index.test.ts",
+    "fix:ts": "deno lint src/index.mjs src/index.test.ts --fix",
     "check:ts": "tsc -noEmit"
   },
   "dependencies": {
@@ -52,7 +52,6 @@
     "vanjs-core": "^1.5.3"
   },
   "peerDependencies": {
-    "@thednp/domparser": "*",
     "vanjs-core": "^1.2.0",
     "vite": "^5.0.0 || ^6.0.0"
   },

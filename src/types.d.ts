@@ -1,6 +1,12 @@
 /// <reference path="global.d.ts" />
 
-import type { DOMNode, RootNode, ParseResult, NodeLike, ChildLike } from "@thednp/domparser";
+import type {
+  ChildLike,
+  DOMNode,
+  NodeLike,
+  ParseResult,
+  RootNode,
+} from "@thednp/domparser";
 import type { FilterPattern } from "@rollup/pluginutils";
 import type { ParserOptions } from "@vanjs/parser";
 import { transformWithEsbuild, type UserConfig } from "vite";
@@ -25,32 +31,43 @@ export declare const VitePluginVanSVG: (config?: VitePluginSvgVanOptions) => {
 };
 export default VitePluginVanSVG;
 
+export type VanJSCode = {
+  code: string;
+  tags: string[];
+  components: string[];
+  attributes?: Record<string, string>;
+};
 
-export type VanJSCode = { code: string, tags: string[], components: string[], attributes?: Record<string, string> }
-
-type ChildEl = ChildLike & Omit<NodeLike, "attributes"> & { attributes: string | Record<string, string> }
-& {
-//   nodeName: string;
-//   tagName: string;
-  children: ChildLike[]
-}
+type ChildEl = ChildLike & Omit<NodeLike, "attributes"> & {
+  attributes: string | Record<string, string>;
+} & {
+  //   nodeName: string;
+  //   tagName: string;
+  children: ChildLike[];
+};
 
 /**
  * Converts a `ChildLike` to a VanJS code string
- * @param input 
- * @param depth 
+ * @param input
+ * @param depth
  */
-export const DOMToVan: (input: ChildEl, depth?: number) => string
+export const DOMToVan: (input: ChildEl, depth?: number) => string;
 
-export type ConverterOptions = { replacement?: string }
+export type ConverterOptions = { replacement?: string };
 
 /**
  * Converts HTML to VanJS code.
  */
-export const htmlToVanCode: (input?: string, converterOptions?: ConverterOptions) => VanJSCode
+export const htmlToVanCode: (
+  input?: string,
+  converterOptions?: ConverterOptions,
+) => VanJSCode;
 
 /** Converts HTML to DOMLike */
-export const htmlToDOM: (input?: string, options?: Partial<ParserOptions>) => ParseResult
+export const htmlToDOM: (
+  input?: string,
+  options?: Partial<ParserOptions>,
+) => ParseResult;
 
 /**
  * Returns a quoted string if the key is a valid identifier,
