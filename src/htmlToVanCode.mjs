@@ -1,7 +1,8 @@
-import { Parser } from "@thednp/domparser";
+import { Parser } from "@thednp/domparser/parser";
 
 /** @typedef {typeof import("./types").DOMToVan} DOMToVan */
 /** @typedef {typeof import("./types").htmlToDOM} htmlToDOM */
+/** @typedef {import("@thednp/domparser").RootLike} RootLike */
 /** @typedef {import("@thednp/domparser").NodeLike} NodeLike */
 /** @typedef {import("@thednp/domparser").ChildLike} ChildLike */
 /** @typedef {import("@thednp/domparser").ParseResult} ParseResult */
@@ -23,8 +24,7 @@ export const quoteText = (key) =>
 const htmlToDOM = (input) => {
   if (!input) return { root: { nodeName: '#document', children: [] }, tags: [], components: [] };
   if (typeof input !== 'string') throw new TypeError('input must be a string');
-  const parser = Parser();
-  return parser.parseFromString(input);
+  return Parser().parseFromString(input);
 }
 
 /**

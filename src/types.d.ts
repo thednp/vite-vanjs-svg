@@ -8,8 +8,8 @@ import type {
   RootNode,
 } from "@thednp/domparser";
 import type { FilterPattern } from "@rollup/pluginutils";
-import type { ParserOptions } from "@vanjs/parser";
-import { transformWithEsbuild, type UserConfig } from "vite";
+import type { DomParserOptions } from "@thednp/domparser";
+import { type ResolvedConfig, transformWithEsbuild } from "vite";
 import type {
   PropsWithKnownKeys,
   PropValueOrDerived,
@@ -17,11 +17,11 @@ import type {
   TagFunc,
 } from "vanjs-core";
 
-export interface VitePluginSvgVanOptions {
+export type VitePluginSvgVanOptions = Partial<ResolvedConfig> & {
   esbuildOptions?: Parameters<typeof transformWithEsbuild>[2];
   exclude?: FilterPattern;
   include?: FilterPattern;
-}
+};
 
 export declare const VitePluginVanSVG: (config?: VitePluginSvgVanOptions) => {
   name: string;
@@ -66,7 +66,7 @@ export const htmlToVanCode: (
 /** Converts HTML to DOMLike */
 export const htmlToDOM: (
   input?: string,
-  options?: Partial<ParserOptions>,
+  options?: Partial<DomParserOptions>,
 ) => ParseResult;
 
 /**

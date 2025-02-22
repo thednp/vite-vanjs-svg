@@ -136,7 +136,7 @@ export default function vitePluginSvgVan(options = {}) {
   } = options;
   const filter = createFilter(include, exclude);
   const postfixRE = /[?#].*$/s;
-  /** @type {UserConfig} */
+  /** @type {Partial<UserConfig>} */
   let config;
 
   return {
