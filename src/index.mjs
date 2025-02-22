@@ -3,6 +3,9 @@ import path from "node:path";
 import { transformWithEsbuild } from "vite";
 import { createFilter } from "@rollup/pluginutils";
 import { htmlToVanCode, quoteText } from "./htmlToVanCode.mjs";
+import process from "node:process";
+
+const cwd = process.cwd();
 
 /** @typedef {import("vanjs-core").PropsWithKnownKeys<SVGSVGElement>} PropsWithKnownKeys */
 /** @typedef {import("vite").UserConfig} UserConfig */
@@ -150,12 +153,11 @@ export default function vitePluginSvgVan(options = {}) {
       if (filter(id)) {
         const file = id.replace(postfixRE, "");
         // Resolve the file path
-        const filePath = file.startsWith("/") && config?.publicDir
-          ? /* istanbul ignore next */ path.resolve(
-            config.publicDir,
-            file.slice(1),
-          )
+        /* istanbul ignore next @preserve - we cannot test this outside the vite runtime */
+        const filePath = !file.startsWith(cwd) && file.startsWith("/") && config?.publicDir
+          ? path.resolve(config.publicDir, file.slice(1))
           : file;
+
         // Read the SVG file
         const svgCode = await fs.promises.readFile(filePath, "utf8");
 
