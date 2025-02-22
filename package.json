@@ -31,7 +31,7 @@
     "src/index.mjs",
     "src/htmlToVanCode.mjs",
     "src/index.test.ts",
-    "src/index.test.ts",
+    "src/types.d.ts",
     "src/global.d.ts",
     "README.md",
     "LICENSE"
