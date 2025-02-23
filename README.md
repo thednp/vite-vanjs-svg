@@ -1,8 +1,8 @@
-# vite-plugin-vanjs-svg
+# vite-vanjs-svg
 
-[![Coverage Status](https://coveralls.io/repos/github/thednp/vite-plugin-vanjs-svg/badge.svg)](https://coveralls.io/github/thednp/vite-plugin-vanjs-svg)
-[![ci](https://github.com/thednp/vite-plugin-vanjs-svg/actions/workflows/ci.yml/badge.svg)](https://github.com/thednp/vite-plugin-vanjs-svg/actions/workflows/ci.yml)
-[![NPM Version](https://img.shields.io/npm/v/vite-plugin-vanjs-svg.svg)](https://www.npmjs.com/package/vite-plugin-vanjs-svg)
+[![Coverage Status](https://coveralls.io/repos/github/thednp/vite-vanjs-svg/badge.svg)](https://coveralls.io/github/thednp/vite-vanjs-svg)
+[![ci](https://github.com/thednp/vite-vanjs-svg/actions/workflows/ci.yml/badge.svg)](https://github.com/thednp/vite-vanjs-svg/actions/workflows/ci.yml)
+[![NPM Version](https://img.shields.io/npm/v/vite-vanjs-svg.svg)](https://www.npmjs.com/package/vite-vanjs-svg)
 [![typescript version](https://img.shields.io/badge/typescript-5.6.2-brightgreen)](https://www.typescriptlang.org/)
 [![vanjs-core version](https://img.shields.io/badge/vanjs--core-1.5.3-brightgreen)](https://github.com/vanjs-org/van)
 [![vitest version](https://img.shields.io/badge/vitest-3.0.6-brightgreen)](https://www.vitest.dev/)
@@ -10,8 +10,6 @@
 
 
 A Vite plugin that transforms SVG files into VanJS components using the [DOMParser](https://github.com/thednp/domparser).
-
-**Note:** The plugin will also resolve SVG files from the `/public` folder or any valid `viteConfig.publicDir` option.
 
 
 ## Features
@@ -26,23 +24,23 @@ A Vite plugin that transforms SVG files into VanJS components using the [DOMPars
 ## Installation
 
 ```bash
-npm install -D vite-plugin-vanjs-svg
+npm install -D vite-vanjs-svg
 ```
 
 ```bash
-pnpm add -D vite-plugin-vanjs-svg
+pnpm add -D vite-vanjs-svg
 ```
 
 ```bash
-yarn add -D vite-plugin-vanjs-svg
+yarn add -D vite-vanjs-svg
 ```
 
 ```bash
-deno add npm:vite-plugin-vanjs-svg
+deno add npm:vite-vanjs-svg
 ```
 
 ```bash
-bun install vite-plugin-vanjs-svg
+bun install vite-vanjs-svg
 ```
 
 
@@ -51,7 +49,7 @@ bun install vite-plugin-vanjs-svg
 ```ts
 // vite.config.ts
 import { defineConfig } from 'vite'
-import vanSVG from 'vite-plugin-vanjs-svg'
+import vanSVG from 'vite-vanjs-svg'
 
 export default defineConfig({
   plugins: [
@@ -89,7 +87,7 @@ To add typescript support, edit your `src/vite-env.d.ts` (or any global types yo
 
 ```ts
 /// <reference types="vite/client" />
-/// <reference types="vite-plugin-vanjs-svg" />
+/// <reference types="vite-vanjs-svg" />
 ```
 
 
@@ -111,7 +109,7 @@ const app = () => {
 **Notes**:
  - style attribute only supports string value;
  - `fill`, `fillOpacity`, `stroke`, `strokeWidth`, `strokeOpacity`, `transform`, `width`, `height`, `class` and `style` attributes are fully reactive.
-
+ - The plugin will also resolve SVG files from the `/public` folder or any valid `viteConfig.publicDir` option.
 
 ## Contributing
 * Fork it!
@@ -123,8 +121,11 @@ const app = () => {
 
 ## Acknowledgments
 * [vanjs-converter](https://github.com/vanjs-org/converter) - For the first prototype version of the plugin;
-* [vite-plugin-svgr](https://github.com/pd4d10/vite-plugin-svgr) - For inspiration on the plugin architecture.
+* [vite-plugin-svgr](https://github.com/pd4d10/vite-plugin-svgr) - For inspiration on the plugin architecture;
+* [vite-solid-svg](https://github.com/thednp/vite-solid-svg) - For the SolidJS version;
+* [vite-react-svg](https://github.com/thednp/vite-react-svg) - For the React version.
+* 
 
 
 ## License
-**vite-plugin-vanjs-svg** is released under [MIT License](LICENSE).
+**vite-vanjs-svg** is released under [MIT License](LICENSE).

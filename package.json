@@ -1,10 +1,10 @@
 {
-  "name": "vite-plugin-vanjs-svg",
-  "version": "0.0.4",
+  "name": "vite-vanjs-svg",
+  "version": "0.0.1",
   "description": "Vite plugin to transform SVGs into VanJS components",
   "author": "thednp",
   "license": "MIT",
-  "homepage": "https://github.com/thednp/vite-plugin-vanjs-svg#readme",
+  "homepage": "https://github.com/thednp/vite-vanjs-svg#readme",
   "keywords": [
     "vite",
     "plugin",
@@ -13,10 +13,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/thednp/vite-plugin-vanjs-svg"
+    "url": "https://github.com/thednp/vite-vanjs-svg"
   },
   "bugs": {
-    "url": "https://github.com/thednp/vite-plugin-vanjs-svg/issues"
+    "url": "https://github.com/thednp/vite-vanjs-svg/issues"
   },
   "main": "src/index.mjs",
   "module": "src/index.mjs",
