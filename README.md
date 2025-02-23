@@ -125,7 +125,6 @@ const app = () => {
 * [vite-plugin-svgr](https://github.com/pd4d10/vite-plugin-svgr) - For inspiration on the plugin architecture;
 * [vite-solid-svg](https://github.com/thednp/vite-solid-svg) - For the SolidJS version;
 * [vite-react-svg](https://github.com/thednp/vite-react-svg) - For the React version.
-* 
 
 
 ## License
