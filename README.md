@@ -107,9 +107,10 @@ const app = () => {
 }
 ```
 **Notes**:
- - style attribute only supports string value;
- - `fill`, `fillOpacity`, `stroke`, `strokeWidth`, `strokeOpacity`, `transform`, `width`, `height`, `class` and `style` attributes are fully reactive.
+ - The `style` attribute only supports string value;
+ - The `fill`, `fillOpacity`, `stroke`, `strokeWidth`, `strokeOpacity`, `transform`, `width`, `height`, `class` and `style` attributes are fully reactive.
  - The plugin will also resolve SVG files from the `/public` folder or any valid `viteConfig.publicDir` option.
+
 
 ## Contributing
 * Fork it!
