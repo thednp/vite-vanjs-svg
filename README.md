@@ -9,7 +9,7 @@
 [![vite version](https://img.shields.io/badge/vite-6.1.1-brightgreen)](https://vite.dev)
 
 
-A Vite plugin that transforms SVG files into VanJS components using the [DOMParser](https://github.com/thednp/domparser).
+A Vite plugin that transforms SVG files into VanJS components using the [DOMParser](https://github.com/thednp/domparser). One of the fastest UI frameworks deserves the fastest plugin, check out the [React](https://github.com/thednp/vite-react-svg) version to learn why.
 
 
 ## Features
