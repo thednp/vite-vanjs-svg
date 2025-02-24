@@ -1,6 +1,6 @@
 {
   "name": "vite-vanjs-svg",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Vite plugin to transform SVGs into VanJS components",
   "author": "thednp",
   "license": "MIT",
@@ -36,11 +36,12 @@
     "LICENSE"
   ],
   "scripts": {
-    "test": "vitest --config vitest.config.mts",
-    "test-ui": "vitest --config vitest.config.mts --ui=true",
+    "dev": "vite serve demo --config demo/vite.config.ts",
+    "test": "vitest --config vitest.config.ts",
+    "test-ui": "vitest --config vitest.config.ts --ui=true",
     "prepublishOnly": "pnpm up && pnpm lint && pnpm format && pnpm badges",
     "badges": "npx -p dependency-version-badge update-badge vanjs-core typescript vitest vite",
-    "format": "deno fmt src/index.mjs src/index.test.ts src/types.d.ts",
+    "format": "deno fmt src/*.mjs src/*.ts demo/*.ts",
     "lint": "pnpm lint:ts && pnpm check:ts",
     "lint:ts": "deno lint src/index.mjs src/index.test.ts",
     "fix:ts": "deno lint src/index.mjs src/index.test.ts --fix",

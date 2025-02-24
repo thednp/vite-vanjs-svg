@@ -16,7 +16,6 @@ A Vite plugin that transforms SVG files into VanJS components using the [DOMPars
 * 🚀 Fast transformation using [DOMParser](https://github.com/thednp/domparser)
 * 🎯 TypeScript support
 * 🔧 Configurable transformation options
-* 💪 Full props support (className, style, events, etc.)
 * 🔥 Hot Module Replacement (HMR) support
 * ⚡ Vitest powered tests
 
@@ -107,17 +106,9 @@ const app = () => {
 }
 ```
 **Notes**:
- - The `style` attribute only supports string value;
- - The `fill`, `fillOpacity`, `stroke`, `strokeWidth`, `strokeOpacity`, `transform`, `width`, `height`, `class` and `style` attributes are fully reactive.
- - The plugin will also resolve SVG files from the `/public` folder or any valid `viteConfig.publicDir` option.
-
-
-## Contributing
-* Fork it!
-* Create your feature branch: `git checkout -b my-new-feature`
-* Commit your changes: `git commit -am 'Add some feature'`
-* Push to the branch: `git push origin 'my-new-feature'`
-* Submit a pull request
+ * All properties present in the markup of your SVG files will be used as default values;
+ * The `style` attribute only supports string value;
+ * The plugin will also resolve SVG files from the `/public` folder or any valid `viteConfig.publicDir` option.
 
 
 ## Acknowledgments

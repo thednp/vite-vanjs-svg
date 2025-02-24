@@ -5,6 +5,7 @@ import { VitePluginSvgVanOptions } from "./types";
 
 // import plugin
 import svgVan from "./index.mjs";
+import { htmlToVanCode } from "./htmlToVanCode.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -39,7 +40,7 @@ describe("vite-plugin-vanjs-svg", () => {
     expect(result.code).toContain("export default function SVGComponent");
 
     // Check if the component handles props
-    expect(result.code).toContain("initialProps = {}");
+    expect(result.code).toContain("props = {}");
 
     // Check if SVG content is included
     expect(result.code).toContain("viewBox");
@@ -55,6 +56,35 @@ describe("vite-plugin-vanjs-svg", () => {
     const plugin = svgVan();
     const result = await plugin.load?.("test.svg");
     expect(result).toBeNull();
+  });
+
+  it("should work with attributes", () => {
+    // a set of tests to add full coverage
+    // while the plugin is designed strictly for SVG
+    // we still need to handle React attribute namespace
+    const html = `
+  <fieldset>
+    "This is a text node"
+    <button class="btn" aria-disabled="true" data-disabled="true" disabled>click me</button>
+    <label for="text-input">Sample label</label>
+    <input type="text" id="text-input" name="text-input" value="Sample value" />
+  </fieldset>
+    `.trim();
+
+    const code = htmlToVanCode(html);
+    expect(code.attributes).toEqual({});
+  });
+
+  it("should handle invalid markup", () => {
+    expect(htmlToVanCode()).toEqual({ code: "", attributes: {}, tags: [], components: [] });
+
+    try {
+      // @ts-expect-error - we need to test this case
+      htmlToVanCode({});
+    } catch (er: unknown) {
+      expect(er).toBeInstanceOf(TypeError);
+      expect((er as TypeError).message).toEqual("input must be a string");
+    }
   });
 
   it("should accept plugin options", () => {

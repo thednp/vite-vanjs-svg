@@ -26,7 +26,7 @@ export type VitePluginSvgVanOptions = Partial<ResolvedConfig> & {
 export declare const VitePluginVanSVG: (config?: VitePluginSvgVanOptions) => {
   name: string;
   enforce: "pre" | "post" | undefined;
-  configResolved: (cfg: UserConfig) => void;
+  configResolved: (cfg: ResolvedConfig) => void;
   load: (id: string) => Promise<{ code: string; map: null } | null>;
 };
 export default VitePluginVanSVG;
@@ -41,8 +41,6 @@ export type VanJSCode = {
 type ChildEl = ChildLike & Omit<NodeLike, "attributes"> & {
   attributes: string | Record<string, string>;
 } & {
-  //   nodeName: string;
-  //   tagName: string;
   children: ChildLike[];
 };
 
@@ -53,20 +51,16 @@ type ChildEl = ChildLike & Omit<NodeLike, "attributes"> & {
  */
 export const DOMToVan: (input: ChildEl, depth?: number) => string;
 
-export type ConverterOptions = { replacement?: string };
-
 /**
  * Converts HTML to VanJS code.
  */
 export const htmlToVanCode: (
   input?: string,
-  converterOptions?: ConverterOptions,
 ) => VanJSCode;
 
 /** Converts HTML to DOMLike */
 export const htmlToDOM: (
   input?: string,
-  options?: Partial<DomParserOptions>,
 ) => ParseResult;
 
 /**

@@ -18,62 +18,80 @@ export const quoteText = (key) =>
 
 /**
  * Converts HTML to VanJS code.
- * 
+ *
  * @type {htmlToDOM}
  */
 const htmlToDOM = (input) => {
-  if (!input) return { root: { nodeName: '#document', children: [] }, tags: [], components: [] };
-  if (typeof input !== 'string') throw new TypeError('input must be a string');
+  if (!input) {
+    return {
+      root: { nodeName: "#document", children: [] },
+      tags: [],
+      components: [],
+    };
+  }
+  if (typeof input !== "string") throw new TypeError("input must be a string");
   return Parser().parseFromString(input);
-}
+};
 
 /**
  * Converts a `DOMNode` to a VanJS code string
- * @type {DOMToVan} 
+ * @type {DOMToVan}
  */
 const DOMToVan = (input, depth = 0) => {
   const { tagName, nodeName, attributes, children, nodeValue } = input;
-  const isReplacement = typeof attributes === 'string';
-  const isText = nodeName === '#text';
-  const firstChildIsText = children?.[0]?.nodeName === '#text';
-  const attributeEntries = isReplacement ? [] : Object.entries(attributes || {});
+  const isText = nodeName === "#text";
+  const firstChildIsText = children?.[0]?.nodeName === "#text";
+  const attributeEntries = Object.entries(attributes || {});
   const spaces = "  ".repeat(depth); // Calculate spaces based on depth
-  let output = isText ? '' : (spaces + `${tagName}(`);
+  let output = isText ? "" : (spaces + `${tagName}(`);
 
-  if (attributeEntries.length || isReplacement) {
-    const attributesHTML = isReplacement ? attributes : attributeEntries.map(([key, value]) => `${quoteText(key)}: "${value}"`).join(', ');
-    output += isReplacement ? attributesHTML : `{ ${attributesHTML} }`;
-    output += children?.length ? ',' : '';
-  }
+  const attributesHTML =
+    (attributeEntries.length
+      ? attributeEntries.map(([key, value]) => `${quoteText(key)}: "${value}"`)
+        .join(", ")
+      : "")
+      .concat(depth === 0 ? ", ...props" : "");
+  output += !isText ? `{ ${attributesHTML} }` : "";
+  output += !isText && children?.length ? "," : "";
+
   if (children?.length) {
-    const childrenHTML = children
+    const childrenCode = children
       // Increase depth for children
-      // @ts-expect-error
-      .map(child => (firstChildIsText ? (attributeEntries.length ? " " : "") : ("\n" + "  ".repeat(depth + 1))) + DOMToVan(child, depth + 1))
-      .join(',');
-    output += `${childrenHTML}`;
+      .map((child) =>
+        (firstChildIsText
+          ? (attributeEntries.length ? " " : "")
+          // @ts-expect-error
+          : ("\n" + "  ".repeat(depth + 1))) + DOMToVan(child, depth + 1)
+      )
+      .join(",");
+    output += `${childrenCode}`;
   }
   if (nodeValue) {
     output += `"${nodeValue}"`;
   }
   // Adjust newline for closing bracket
-  output += isText ? "" : (children?.length && !firstChildIsText ? ("\n" + "  ".repeat(depth + 1) + ')') : (')'));
+  output += isText
+    ? ""
+    : (children?.length && !firstChildIsText
+      ? ("\n" + "  ".repeat(depth + 1) + ")")
+      : (")"));
 
   return output;
-}
+};
 
 /**
  * Converts HTML markup to VanJS code.
- * 
+ *
  * @type {htmlToVanCode}
  */
-export const htmlToVanCode = (input, options = {}) => {
-  const { replacement } = options;
+export const htmlToVanCode = (input) => {
   const { root, components, tags } = htmlToDOM(input);
-  if (!root?.children.length) return { code: '', tags: [], components: [], attributes: {} };
+  if (!root?.children.length) {
+    return { code: "", tags: [], components: [], attributes: {} };
+  }
   const { tagName, nodeName, attributes, children } = root.children[0];
   // @ts-expect-error
-  const code = DOMToVan({ tagName, nodeName, attributes: replacement || attributes, children });
+  const code = DOMToVan({ tagName, nodeName, attributes, children });
 
   return { code, tags, components, attributes };
-}
+};
