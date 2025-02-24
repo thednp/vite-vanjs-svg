@@ -32,7 +32,13 @@ export const App = () => {
           onchange: (e: ChangeEvent) => width.val = Number(e.target.value),
         }),
       ),
-      VanJSIcon({ class: "logo vanjs", width: width, height: "auto" }),
+      VanJSIcon({
+        class: "logo vanjs",
+        version: "1.5",
+        width: width,
+        height: "100%",
+        fill: "currentColor",
+      }),
     ),
   );
 };

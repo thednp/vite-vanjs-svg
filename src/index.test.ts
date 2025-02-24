@@ -76,7 +76,12 @@ describe("vite-plugin-vanjs-svg", () => {
   });
 
   it("should handle invalid markup", () => {
-    expect(htmlToVanCode()).toEqual({ code: "", attributes: {}, tags: [], components: [] });
+    expect(htmlToVanCode()).toEqual({
+      code: "",
+      attributes: {},
+      tags: [],
+      components: [],
+    });
 
     try {
       // @ts-expect-error - we need to test this case

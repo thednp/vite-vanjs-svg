@@ -100,7 +100,7 @@ const app = () => {
       width: 24,
       height: 24,
       class: 'my-icon',
-      style: 'fill: "currentColor"'
+      style: 'fill: currentColor'
     })
   )
 }
@@ -114,7 +114,7 @@ const app = () => {
 ## Acknowledgments
 * [vanjs-converter](https://github.com/vanjs-org/converter) - For the first prototype version of the plugin;
 * [vite-plugin-svgr](https://github.com/pd4d10/vite-plugin-svgr) - For inspiration on the plugin architecture;
-* [vite-solid-svg](https://github.com/thednp/vite-solid-svg) - For the SolidJS version;
+* [vite-solid-svg](https://github.com/thednp/vite-solid-svg) - For the SolidJS version and types for this version;
 * [vite-react-svg](https://github.com/thednp/vite-react-svg) - For the React version.
 
 
