@@ -3,10 +3,27 @@ declare module "*.svg?van" {
 
   type PropValueOrDerived<T> = T | State<T>;
 
+  interface EventHandler<T, E extends Event> {
+    (
+      e: E & {
+        currentTarget: T;
+        target: EventTarget & Element;
+      },
+    ): void;
+  }
+  interface BoundEventHandler<
+    T,
+    E extends Event,
+    EHandler extends EventHandler<T, unknown> = EventHandler<T, E>,
+  > {
+    0: (data: unknown, ...e: Parameters<EHandler>) => void;
+    1: unknown;
+  }
+
   type EventHandlerUnion<
     T,
     E extends Event,
-    EHandler extends EventHandler<T, any> = EventHandler<T, E>,
+    EHandler extends EventHandler<T, unknown> = EventHandler<T, E>,
   > = EHandler | BoundEventHandler<T, E, EHandler>;
 
   interface DOMAttributes<T> {

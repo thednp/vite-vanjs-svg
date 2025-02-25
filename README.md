@@ -5,8 +5,8 @@
 [![NPM Version](https://img.shields.io/npm/v/vite-vanjs-svg.svg)](https://www.npmjs.com/package/vite-vanjs-svg)
 [![typescript version](https://img.shields.io/badge/typescript-5.7.3-brightgreen)](https://www.typescriptlang.org/)
 [![vanjs-core version](https://img.shields.io/badge/vanjs--core-1.5.3-brightgreen)](https://github.com/vanjs-org/van)
-[![vitest version](https://img.shields.io/badge/vitest-3.0.6-brightgreen)](https://www.vitest.dev/)
-[![vite version](https://img.shields.io/badge/vite-6.1.1-brightgreen)](https://vite.dev)
+[![vitest version](https://img.shields.io/badge/vitest-3.0.7-brightgreen)](https://www.vitest.dev/)
+[![vite version](https://img.shields.io/badge/vite-6.2.0-brightgreen)](https://vite.dev)
 
 
 A Vite plugin that transforms SVG files into VanJS components using the [DOMParser](https://github.com/thednp/domparser). One of the fastest UI frameworks deserves the fastest plugin, check out the [React](https://github.com/thednp/vite-react-svg) version to learn why is so fast.

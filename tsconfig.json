@@ -29,6 +29,7 @@
   "include": [
     "./src/index.test.ts",
     "./src/types.d.ts",
+    "./demo"
   ],
   "exclude": ["node_modules", "experiments", "coverage"],
 }
