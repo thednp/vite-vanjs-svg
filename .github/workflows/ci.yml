@@ -5,16 +5,14 @@ on:
     branches:
       - master
     paths:
-      - index.test.ts
-      - index.mjs
+      - src
       - package.json
       - .github/workflows/ci.yml
   pull_request:
     branches:
       - master
     paths:
-      - index.test.ts
-      - index.mjs
+      - src
       - package.json
       - .github/workflows/ci.yml
 
