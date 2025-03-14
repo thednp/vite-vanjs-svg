@@ -24,8 +24,9 @@ function transformSvgToVanJS(svgCode) {
   const componentCode = `
 import van from 'vanjs-core';
 
-export default function SVGComponent(props = {}) {
+export default ({ children, ...rest }) => {
 	const { ${vanCode.tags.join(", ")} } = van.tags("http://www.w3.org/2000/svg");
+  const props = Object.fromEntries(Object.entries(rest).filter(([_, val]) => val));
 	return ${vanCode.code}
 }
 `.trim();

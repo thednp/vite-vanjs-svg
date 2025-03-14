@@ -37,10 +37,7 @@ describe("vite-plugin-vanjs-svg", () => {
     expect(result.code).toContain("import van from");
 
     // Check if the transformed code creates a component
-    expect(result.code).toContain("export default function SVGComponent");
-
-    // Check if the component handles props
-    expect(result.code).toContain("props = {}");
+    expect(result.code).toContain("export default ({ children, ...rest })");
 
     // Check if SVG content is included
     expect(result.code).toContain("viewBox");

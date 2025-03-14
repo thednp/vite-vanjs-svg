@@ -1,6 +1,6 @@
 {
   "name": "vite-vanjs-svg",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Vite plugin to transform SVGs into VanJS components",
   "author": "thednp",
   "license": "MIT",
@@ -57,13 +57,13 @@
     "vite": "^5.0.0 || ^6.0.0"
   },
   "devDependencies": {
-    "@types/node": "^22.13.5",
-    "@vitest/browser": "^3.0.7",
-    "@vitest/coverage-istanbul": "^3.0.7",
-    "@vitest/ui": "^3.0.7",
-    "typescript": "^5.7.3",
-    "vite": "^6.2.0",
-    "vitest": "^3.0.7"
+    "@types/node": "^22.13.10",
+    "@vitest/browser": "^3.0.8",
+    "@vitest/coverage-istanbul": "^3.0.8",
+    "@vitest/ui": "^3.0.8",
+    "typescript": "^5.8.2",
+    "vite": "^6.2.2",
+    "vitest": "^3.0.8"
   },
   "packageManager": "pnpm@8.6.12"
 }
