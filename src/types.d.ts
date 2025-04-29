@@ -9,7 +9,7 @@ import type {
 } from "@thednp/domparser";
 import type { FilterPattern } from "@rollup/pluginutils";
 import type { DomParserOptions } from "@thednp/domparser";
-import { type ResolvedConfig, transformWithEsbuild } from "vite";
+import { type Plugin, type ResolvedConfig, transformWithEsbuild } from "vite";
 import type {
   PropsWithKnownKeys,
   PropValueOrDerived,
@@ -23,13 +23,15 @@ export type VitePluginSvgVanOptions = Partial<ResolvedConfig> & {
   include?: FilterPattern;
 };
 
-export declare const VitePluginVanSVG: (config?: VitePluginSvgVanOptions) => {
-  name: string;
-  enforce: "pre" | "post" | undefined;
-  configResolved: (cfg: ResolvedConfig) => void;
-  load: (id: string) => Promise<{ code: string; map: null } | null>;
-};
+export declare const VitePluginVanSVG: (
+  config?: VitePluginSvgVanOptions,
+) => Plugin<VitePluginSvgVanOptions>;
 export default VitePluginVanSVG;
+
+export type Load = (
+  id: string,
+  ops?: { ssr: boolean },
+) => Promise<({ code: string; map: null } | null)>;
 
 export type VanJSCode = {
   code: string;

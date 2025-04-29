@@ -1,7 +1,7 @@
 import { fileURLToPath } from "node:url";
 import { dirname, resolve } from "node:path";
 import { describe, expect, it } from "vitest";
-import { VitePluginSvgVanOptions } from "./types";
+import { Load, VitePluginSvgVanOptions } from "./types";
 
 // import plugin
 import svgVan from "./index.mjs";
@@ -25,7 +25,9 @@ describe("vite-plugin-vanjs-svg", () => {
     const plugin = svgVan();
     const svgPath = resolve(__dirname, "vanjs.svg");
 
-    const result = await plugin.load?.(svgPath + "?van");
+    const result = await (plugin?.load as Load)?.(svgPath + "?van", {
+      ssr: false,
+    });
     // console.log(result);
 
     if (!result) return;
@@ -45,13 +47,13 @@ describe("vite-plugin-vanjs-svg", () => {
 
   it("should not transform non-svg files", async () => {
     const plugin = svgVan();
-    const result = await plugin.load?.("test.js?van");
+    const result = await (plugin.load as Load)?.("test.js?van");
     expect(result).toBeNull();
   });
 
   it("should not transform svg files without ?van query", async () => {
     const plugin = svgVan();
-    const result = await plugin.load?.("test.svg");
+    const result = await (plugin.load as Load)?.("test.svg");
     expect(result).toBeNull();
   });
 
