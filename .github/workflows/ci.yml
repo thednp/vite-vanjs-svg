@@ -5,14 +5,18 @@ on:
     branches:
       - master
     paths:
-      - src
+      - src/htmlToVanCode.mjs
+      - src/index.mjs
+      - src/index.test.ts
       - package.json
       - .github/workflows/ci.yml
   pull_request:
     branches:
       - master
     paths:
-      - src
+      - src/htmlToVanCode.mjs
+      - src/index.mjs
+      - src/index.test.ts
       - package.json
       - .github/workflows/ci.yml
 
@@ -38,7 +42,7 @@ jobs:
       - name: Node Setup
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: pnpm
 
       - name: Install dependencies

@@ -1,6 +1,6 @@
 {
   "name": "vite-vanjs-svg",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Vite plugin to transform SVGs into VanJS components",
   "author": "thednp",
   "license": "MIT",
@@ -39,7 +39,7 @@
     "dev": "vite serve demo --config demo/vite.config.ts",
     "test": "vitest --config vitest.config.ts",
     "test-ui": "vitest --config vitest.config.ts --ui=true",
-    "prepublishOnly": "pnpm up && pnpm lint && pnpm format && pnpm badges",
+    "prepublishOnly": "pnpm update --latest && pnpm lint && pnpm format && pnpm badges",
     "badges": "npx -p dependency-version-badge update-badge vanjs-core typescript vitest vite",
     "format": "deno fmt src/*.mjs src/*.ts demo/*.ts",
     "lint": "pnpm lint:ts && pnpm check:ts",
@@ -49,7 +49,7 @@
   },
   "dependencies": {
     "@rollup/pluginutils": "^5.1.4",
-    "@thednp/domparser": "^0.0.3",
+    "@thednp/domparser": "^0.1.2",
     "vanjs-core": "^1.5.5"
   },
   "peerDependencies": {
@@ -57,13 +57,13 @@
     "vite": "^5.0.0 || ^6.0.0"
   },
   "devDependencies": {
-    "@types/node": "^22.15.3",
-    "@vitest/browser": "^3.1.2",
-    "@vitest/coverage-istanbul": "^3.1.2",
-    "@vitest/ui": "^3.1.2",
+    "@types/node": "^22.15.23",
+    "@vitest/browser": "^3.1.4",
+    "@vitest/coverage-istanbul": "^3.1.4",
+    "@vitest/ui": "^3.1.4",
     "typescript": "^5.8.3",
-    "vite": "^6.3.3",
-    "vitest": "^3.1.2"
+    "vite": "^6.3.5",
+    "vitest": "^3.1.4"
   },
   "packageManager": "pnpm@8.6.12"
 }
