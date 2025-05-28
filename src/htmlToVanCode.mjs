@@ -64,10 +64,10 @@ const DOMToVan = (input, depth = 0) => {
           : ("\n" + "  ".repeat(depth + 1))) + DOMToVan(child, depth + 1)
       )
       .join(",");
-    output += `${childrenCode}`;
+    output += childrenCode;
   }
   if (nodeValue) {
-    output += `"${nodeValue}"`;
+    output += `\`${nodeValue}\``;
   }
   // Adjust newline for closing bracket
   output += isText
