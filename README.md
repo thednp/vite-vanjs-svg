@@ -39,7 +39,7 @@ deno add npm:vite-vanjs-svg
 ```
 
 ```bash
-bun install vite-vanjs-svg
+bun add vite-vanjs-svg
 ```
 
 
