@@ -1,7 +1,7 @@
 import { fileURLToPath } from "node:url";
 import { dirname, resolve } from "node:path";
 import { describe, expect, it } from "vitest";
-import { Load, VitePluginSvgVanOptions } from "./types";
+import { Load, VitePluginSvgVanOptions } from "./types.ts";
 
 // import plugin
 import svgVan from "./index.mjs";
