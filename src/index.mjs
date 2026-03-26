@@ -1,6 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
-import { transformWithEsbuild } from "vite";
+import { transformWithOxc } from "vite";
 import { createFilter } from "@rollup/pluginutils";
 import { htmlToVanCode } from "./htmlToVanCode.mjs";
 import process from "node:process";
@@ -70,7 +70,7 @@ export default function vitePluginSvgVan(options = {}) {
         const componentCode = transformSvgToVanJS(svgCode);
 
         // Transform the component code using esbuild
-        const result = await transformWithEsbuild(componentCode, id, {
+        const result = await transformWithOxc(componentCode, id, {
           loader: "js",
           ...esbuildOptions,
         });
