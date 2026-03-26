@@ -28,10 +28,8 @@
     }
   },
   "files": [
-    "src/index.mjs",
-    "src/htmlToVanCode.mjs",
-    "src/types.d.ts",
-    "src/global.d.ts",
+    "src",
+    "package.json",
     "README.md",
     "LICENSE"
   ],
