@@ -71,7 +71,7 @@ export default function vitePluginSvgVan(options = {}) {
 
         // Transform the component code using esbuild
         const result = await transformWithOxc(componentCode, id, {
-          loader: "js",
+          lang: "js",
           ...esbuildOptions,
         });
 
