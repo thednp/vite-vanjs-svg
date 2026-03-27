@@ -6,10 +6,10 @@ import type {
   NodeLike,
   ParseResult,
   RootNode,
+  DomParserOptions,
 } from "@thednp/domparser";
 import type { FilterPattern } from "@rollup/pluginutils";
-import type { DomParserOptions } from "@thednp/domparser";
-import { type Plugin, type ResolvedConfig, transformWithEsbuild } from "vite";
+import { type Plugin, type ResolvedConfig } from "vite";
 import type {
   PropsWithKnownKeys,
   PropValueOrDerived,
@@ -18,7 +18,7 @@ import type {
 } from "vanjs-core";
 
 export type VitePluginSvgVanOptions = Partial<ResolvedConfig> & {
-  esbuildOptions?: Parameters<typeof transformWithEsbuild>[2];
+  // esbuildOptions?: Parameters<typeof transformWithEsbuild>[2];
   exclude?: FilterPattern;
   include?: FilterPattern;
 };

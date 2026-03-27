@@ -1,6 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
-import { transformWithOxc } from "vite";
+// import { transformWithOxc } from "vite";
 import { createFilter } from "@rollup/pluginutils";
 import { htmlToVanCode } from "./htmlToVanCode.mjs";
 import process from "node:process";
@@ -37,7 +37,6 @@ export default ({ children, ...rest }) => {
 /** @type {VitePluginVanSVG} */
 export default function vitePluginSvgVan(options = {}) {
   const {
-    esbuildOptions,
     include = ["**/*.svg?van"],
     exclude,
   } = options;
@@ -69,15 +68,27 @@ export default function vitePluginSvgVan(options = {}) {
         // Transform SVG to VanJS component
         const componentCode = transformSvgToVanJS(svgCode);
 
+        const vite = await import("vite");
+        const viteVersion = this.meta.viteVersion;
+        const isVite8 = viteVersion.startsWith("8")
+        const transformer = isVite8
+          ? "transformWithOxc"
+          : "transformWithEsbuild";
+        const langProp = isVite8 ? "lang" : "loader";
+        const mapProp = isVite8 ? "source_map" : "sourcemap";
+
         // Transform the component code using esbuild
-        const result = await transformWithOxc(componentCode, id, {
-          lang: "js",
-          ...esbuildOptions,
+        const result = await vite[transformer](componentCode, id, {
+          [langProp]: "js",
+          [mapProp]: true,
         });
 
         return {
           code: result.code,
-          map: null,
+          map: result.map ? (
+            // @ts-expect-error - this might be ok
+            isVite8 ? JSON.parse(result.map) : result.map
+          ) : null,
         };
       }
       return null;
