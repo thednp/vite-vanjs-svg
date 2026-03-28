@@ -44,7 +44,7 @@ describe("vite-plugin-vanjs-svg", () => {
 
   it("should transform svg files with ?van query in vite 7", async () => {
     const plugin = svgVan();
-    const svgPath = resolve(__dirname, "vanjs.svg");
+    const svgPath = resolve(__dirname, "./fixtures/vanjs.svg");
     // @ts-expect-error - this is testing
     plugin?.buildStart?.call(mockPlugin7Context);
 
@@ -70,7 +70,7 @@ describe("vite-plugin-vanjs-svg", () => {
 
   it("should transform svg files with ?van query in vite 8", async () => {
     const plugin = svgVan();
-    const svgPath = resolve(__dirname, "vanjs.svg");
+    const svgPath = resolve(__dirname, "./fixtures/vanjs.svg");
     // @ts-expect-error - this is testing
     plugin?.buildStart?.call(mockPlugin8Context);
 
