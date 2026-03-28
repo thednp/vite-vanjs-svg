@@ -15,16 +15,16 @@ vi.mock('vite', async () => {
   return {
     ...actual,
     // Mock any Vite exports if necessary
-    transformWithOxc: vi.fn().mockImplementation((code) => 
-      Promise.resolve({ 
+    transformWithOxc: vi.fn().mockImplementation((code) =>
+      Promise.resolve({
         code,  // return the same code that was passed
-        map: `[{"file": "./file.ts"}]` 
+        map: `[{"file": "./file.ts"}]`
       })
     ),
-    transformWithEsbuild: vi.fn().mockImplementation((code) => 
-      Promise.resolve({ 
+    transformWithEsbuild: vi.fn().mockImplementation((code) =>
+      Promise.resolve({
         code,  // return the same code that was passed
-        map: [{"file": "./file.ts"}] 
+        map: [{ "file": "./file.ts" }]
       })
     ),
   };
@@ -51,7 +51,6 @@ describe("vite-plugin-vanjs-svg", () => {
     const result = await (plugin?.load as Load)?.(svgPath + "?van", {
       ssr: false,
     });
-    // console.log(result);
 
     if (!result) return;
 
@@ -77,7 +76,6 @@ describe("vite-plugin-vanjs-svg", () => {
     const result = await (plugin?.load as Load)?.(svgPath + "?van", {
       ssr: false,
     });
-    // console.log(result);
 
     if (!result) return;
 

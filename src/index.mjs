@@ -1,6 +1,5 @@
 import fs from "node:fs";
 import path from "node:path";
-// import { transformWithOxc } from "vite";
 import { createFilter } from "@rollup/pluginutils";
 import { htmlToVanCode } from "./htmlToVanCode.mjs";
 import process from "node:process";
@@ -75,7 +74,6 @@ export default function vitePluginSvgVan(options = {}) {
 
         const vite = await import("vite");
         const viteVersion = context.meta.viteVersion;
-        // console.log({viteVersion})
         const isVite8 = viteVersion?.startsWith("8");
         const transformer = isVite8
           ? "transformWithOxc"
