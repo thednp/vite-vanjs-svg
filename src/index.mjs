@@ -44,10 +44,15 @@ export default function vitePluginSvgVan(options = {}) {
   const postfixRE = /[?#].*$/s;
   /** @type {Partial<ResolvedConfig>} */
   let config;
+  /** @type {{ meta: { viteVersion: string }}} */
+  let context;
 
   return {
     name: "vanjs-svg",
     enforce: "pre",
+    buildStart() {
+      context = this;
+    },
     // istanbul ignore next - impossible to test outside of vite runtime
     configResolved(cfg) {
       config = cfg;
@@ -69,15 +74,16 @@ export default function vitePluginSvgVan(options = {}) {
         const componentCode = transformSvgToVanJS(svgCode);
 
         const vite = await import("vite");
-        const viteVersion = this.meta.viteVersion;
-        const isVite8 = viteVersion.startsWith("8")
+        const viteVersion = context.meta.viteVersion;
+        console.log({viteVersion})
+        const isVite8 = viteVersion?.startsWith("8")
         const transformer = isVite8
           ? "transformWithOxc"
           : "transformWithEsbuild";
         const langProp = isVite8 ? "lang" : "loader";
         const mapProp = isVite8 ? "source_map" : "sourcemap";
 
-        // Transform the component code using esbuild
+        // Transform the component code using esbuild/oxc
         const result = await vite[transformer](componentCode, id, {
           [langProp]: "js",
           [mapProp]: true,
@@ -86,9 +92,8 @@ export default function vitePluginSvgVan(options = {}) {
         return {
           code: result.code,
           map: result.map ? (
-            // @ts-expect-error - this might be ok
-            isVite8 ? JSON.parse(result.map) : result.map
-          ) : null,
+            typeof result.map === "string" ? JSON.parse(result.map) : result.map
+          ) : /* istanbul ignore next @preserve */null,
         };
       }
       return null;

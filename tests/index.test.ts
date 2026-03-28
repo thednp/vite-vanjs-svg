@@ -1,13 +1,34 @@
 import { fileURLToPath } from "node:url";
 import { dirname, resolve } from "node:path";
-import { describe, expect, it } from "vitest";
-import { Load, VitePluginSvgVanOptions } from "./types.ts";
+import { describe, expect, it, vi } from "vitest";
+import { Load, VitePluginSvgVanOptions } from "../src/types";
 
 // import plugin
-import svgVan from "./index.mjs";
-import { htmlToVanCode } from "./htmlToVanCode.mjs";
+import svgVan from "../src/index.mjs";
+import { htmlToVanCode } from "../src/htmlToVanCode.mjs";
+import { mockPlugin7Context, mockPlugin8Context } from "./fixtures/mock.ts";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
+
+vi.mock('vite', async () => {
+  const actual = await vi.importActual('vite');
+  return {
+    ...actual,
+    // Mock any Vite exports if necessary
+    transformWithOxc: vi.fn().mockImplementation((code) => 
+      Promise.resolve({ 
+        code,  // return the same code that was passed
+        map: `[{"file": "./file.ts"}]` 
+      })
+    ),
+    transformWithEsbuild: vi.fn().mockImplementation((code) => 
+      Promise.resolve({ 
+        code,  // return the same code that was passed
+        map: [{"file": "./file.ts"}] 
+      })
+    ),
+  };
+});
 
 describe("vite-plugin-vanjs-svg", () => {
   it("should be a function", () => {
@@ -21,9 +42,37 @@ describe("vite-plugin-vanjs-svg", () => {
     expect(typeof plugin.load).toBe("function");
   });
 
-  it("should transform svg files with ?van query", async () => {
+  it("should transform svg files with ?van query in vite 7", async () => {
     const plugin = svgVan();
     const svgPath = resolve(__dirname, "vanjs.svg");
+    // @ts-expect-error - this is testing
+    plugin?.buildStart?.call(mockPlugin7Context);
+
+    const result = await (plugin?.load as Load)?.(svgPath + "?van", {
+      ssr: false,
+    });
+    // console.log(result);
+
+    if (!result) return;
+
+    expect(result).toBeDefined();
+    expect(typeof result.code).toBe("string");
+
+    // Check if the transformed code includes VanJS imports
+    expect(result.code).toContain("import van from");
+
+    // Check if the transformed code creates a component
+    expect(result.code).toContain("export default ({ children, ...rest })");
+
+    // Check if SVG content is included
+    expect(result.code).toContain("viewBox");
+  });
+
+  it("should transform svg files with ?van query in vite 8", async () => {
+    const plugin = svgVan();
+    const svgPath = resolve(__dirname, "vanjs.svg");
+    // @ts-expect-error - this is testing
+    plugin?.buildStart?.call(mockPlugin8Context);
 
     const result = await (plugin?.load as Load)?.(svgPath + "?van", {
       ssr: false,

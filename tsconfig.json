@@ -25,7 +25,7 @@
     "checkJs": true,
   },
   "include": [
-    "./src/index.test.ts",
+    "tests/index.test.ts",
     "./src/types.d.ts",
     "./demo"
   ],
