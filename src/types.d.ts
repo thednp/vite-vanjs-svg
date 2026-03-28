@@ -3,10 +3,10 @@
 import type {
   ChildLike,
   DOMNode,
+  DomParserOptions,
   NodeLike,
   ParseResult,
   RootNode,
-  DomParserOptions,
 } from "@thednp/domparser";
 import type { FilterPattern } from "@rollup/pluginutils";
 import { type Plugin, type ResolvedConfig } from "vite";

@@ -75,8 +75,8 @@ export default function vitePluginSvgVan(options = {}) {
 
         const vite = await import("vite");
         const viteVersion = context.meta.viteVersion;
-        console.log({viteVersion})
-        const isVite8 = viteVersion?.startsWith("8")
+        // console.log({viteVersion})
+        const isVite8 = viteVersion?.startsWith("8");
         const transformer = isVite8
           ? "transformWithOxc"
           : "transformWithEsbuild";
@@ -91,9 +91,13 @@ export default function vitePluginSvgVan(options = {}) {
 
         return {
           code: result.code,
-          map: result.map ? (
-            typeof result.map === "string" ? JSON.parse(result.map) : result.map
-          ) : /* istanbul ignore next @preserve */null,
+          map: result.map
+            ? (
+              typeof result.map === "string"
+                ? JSON.parse(result.map)
+                : result.map
+            )
+            : /* istanbul ignore next @preserve */ null,
         };
       }
       return null;
