@@ -61,16 +61,12 @@ While the default options work just fine, for your convenience the plugin allows
 
 ```ts
 interface VitePluginVanSvgOptions {
-  // esbuild transform options
-  esbuildOptions?: EsbuildTransformOPtions;
   // filter options
   include?: string | RegExp | (string | RegExp)[]
   exclude?: string | RegExp | (string | RegExp)[]
 }
 ```
 
-* `esbuildOptions`: [EsbuildTransformOptions](https://esbuild.github.io/api/#transform) esbuild will make sure the plugin will work seamless within the Vite ecosystem and provides some additional options;
-  // filter options
 * `include`: filter option to **include** one or more RegExp for file IDs; the default value is `["**/*.svg?van"]`;
 * `exclude`: filter option to **exclude** one or more RegExp for file IDs.
 
