@@ -1,5 +1,5 @@
 import van from "vanjs-core";
-import VanJSIcon from "../src/vanjs.svg?van";
+import VanJSIcon from "../tests/fixtures/vanjs.svg?van";
 import "./app.css";
 
 type ChangeEvent<T extends EventTarget & Element = HTMLInputElement> =
