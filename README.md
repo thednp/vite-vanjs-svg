@@ -61,7 +61,6 @@ While the default options work just fine, for your convenience the plugin allows
 
 ```ts
 interface VitePluginVanSvgOptions {
-  // filter options
   include?: string | RegExp | (string | RegExp)[]
   exclude?: string | RegExp | (string | RegExp)[]
 }
