@@ -9,6 +9,8 @@ const cwd = process.cwd();
 /** @typedef {import("vanjs-core").PropsWithKnownKeys<SVGSVGElement>} PropsWithKnownKeys */
 /** @typedef {import("vite").ResolvedConfig} ResolvedConfig */
 /** @typedef {typeof import("./types").VitePluginVanSVG} VitePluginVanSVG */
+/** @typedef {import("vite").BuildAppHook} BuildAppHook */
+/** @typedef {ThisParameterType<BuildAppHook>} PluginContext */
 
 /**
  * Compiles SVGs to VanJS component code
@@ -43,7 +45,7 @@ export default function vitePluginSvgVan(options = {}) {
   const postfixRE = /[?#].*$/s;
   /** @type {Partial<ResolvedConfig>} */
   let config;
-  /** @type {{ meta: { viteVersion: string }}} */
+  /** @type {PluginContext} */
   let context;
 
   return {
