@@ -1,6 +1,6 @@
 {
   "name": "vite-vanjs-svg",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "description": "Vite plugin to transform SVGs into VanJS components",
   "author": "thednp",
   "license": "MIT",

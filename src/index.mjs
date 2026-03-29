@@ -38,6 +38,8 @@ export default ({ children, ...rest }) => {
 /** @type {VitePluginVanSVG} */
 export default function vitePluginSvgVan(options = {}) {
   const {
+    esbuildOptions,
+    oxcOptions,
     include = ["**/*.svg?van"],
     exclude,
   } = options;
@@ -45,19 +47,14 @@ export default function vitePluginSvgVan(options = {}) {
   const postfixRE = /[?#].*$/s;
   /** @type {Partial<ResolvedConfig>} */
   let config;
-  /** @type {PluginContext} */
-  let context;
-
-  let viteVersion = "8.0.0";
   let isOxc = true;
 
   return {
     name: "vanjs-svg",
     enforce: "pre",
     buildStart() {
-      context = this;
-      viteVersion = context.meta.viteVersion[0];
-      isOxc = Number(viteVersion) >= 8;
+      const { viteVersion } = this.meta;
+      isOxc = Number(viteVersion[0]) >= 8;
     },
     // istanbul ignore next - impossible to test outside of vite runtime
     configResolved(cfg) {
@@ -83,12 +80,14 @@ export default function vitePluginSvgVan(options = {}) {
 
         const transformer = isOxc ? "transformWithOxc" : "transformWithEsbuild";
         const langProp = isOxc ? "lang" : "loader";
+        const options = (isOxc ? oxcOptions : esbuildOptions) || {};
         // const mapProp = isOxc ? "source_map" : "sourcemap";
 
         // Transform the component code using esbuild/oxc
         const result = await vite[transformer](componentCode, id, {
-          [langProp]: "js",
+          [langProp]: "jsx",
           sourcemap: true,
+          ...options,
         });
 
         return {

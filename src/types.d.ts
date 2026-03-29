@@ -9,7 +9,12 @@ import type {
   RootNode,
 } from "@thednp/domparser";
 import type { FilterPattern } from "@rollup/pluginutils";
-import { type Plugin, type ResolvedConfig } from "vite";
+import type {
+  EsbuildTransformOptions,
+  OxcOptions,
+  Plugin,
+  ResolvedConfig,
+} from "vite";
 import type {
   PropsWithKnownKeys,
   PropValueOrDerived,
@@ -17,8 +22,10 @@ import type {
   TagFunc,
 } from "vanjs-core";
 
-export type VitePluginSvgVanOptions = Partial<ResolvedConfig> & {
-  // esbuildOptions?: Parameters<typeof transformWithEsbuild>[2];
+export type VitePluginSvgVanOptions = {
+  oxcOptions?: OxcOptions;
+  /** @deprecated */
+  esbuildOptions?: EsbuildTransformOptions;
   exclude?: FilterPattern;
   include?: FilterPattern;
 };
@@ -27,11 +34,6 @@ export declare const VitePluginVanSVG: (
   config?: VitePluginSvgVanOptions,
 ) => Plugin<VitePluginSvgVanOptions>;
 export default VitePluginVanSVG;
-
-export type Load = (
-  id: string,
-  ops?: { ssr: boolean },
-) => Promise<({ code: string; map: null } | null)>;
 
 export type VanJSCode = {
   code: string;

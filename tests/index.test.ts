@@ -1,12 +1,17 @@
 import { fileURLToPath } from "node:url";
 import { dirname, resolve } from "node:path";
 import { describe, expect, it, vi } from "vitest";
-import { Load, VitePluginSvgVanOptions } from "../src/types";
+import { VitePluginSvgVanOptions } from "../src/types";
 
 // import plugin
 import svgVan from "../src/index.mjs";
 import { htmlToVanCode } from "../src/htmlToVanCode.mjs";
 import { mockPlugin7Context, mockPlugin8Context } from "./fixtures/mock.ts";
+
+type Load = (
+  id: string,
+  ops?: { ssr: boolean },
+) => Promise<({ code: string; map: null } | null)>;
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -52,19 +57,20 @@ describe("vite-plugin-vanjs-svg", () => {
       ssr: false,
     });
 
-    if (!result) return;
-
     expect(result).toBeDefined();
-    expect(typeof result.code).toBe("string");
+    expect(typeof result?.code).toBe("string");
 
     // Check if the transformed code includes VanJS imports
-    expect(result.code).toContain("import van from");
+    expect(result?.code).toContain("import van from");
 
     // Check if the transformed code creates a component
-    expect(result.code).toContain("export default ({ children, ...rest })");
+    expect(result?.code).toContain("export default ({ children, ...rest })");
 
     // Check if SVG content is included
-    expect(result.code).toContain("viewBox");
+    expect(result?.code).toContain("viewBox");
+
+    // Check if SVG content is included
+    expect(result?.map).toBeDefined();
   });
 
   it("should transform svg files with ?van query in vite 8", async () => {
@@ -77,19 +83,20 @@ describe("vite-plugin-vanjs-svg", () => {
       ssr: false,
     });
 
-    if (!result) return;
-
     expect(result).toBeDefined();
-    expect(typeof result.code).toBe("string");
+    expect(typeof result?.code).toBe("string");
 
     // Check if the transformed code includes VanJS imports
-    expect(result.code).toContain("import van from");
+    expect(result?.code).toContain("import van from");
 
     // Check if the transformed code creates a component
-    expect(result.code).toContain("export default ({ children, ...rest })");
+    expect(result?.code).toContain("export default ({ children, ...rest })");
 
     // Check if SVG content is included
-    expect(result.code).toContain("viewBox");
+    expect(result?.code).toContain("viewBox");
+
+    // Check if SVG map is included
+    expect(result?.map).toBeDefined();
   });
 
   it("should not transform non-svg files", async () => {
